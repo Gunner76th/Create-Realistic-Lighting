@@ -25,3 +25,10 @@ ordering="NONE"
 side="BOTH"
 
 
+
+[[dependencies.${mod_id}]]
+modId="powergrid"
+type="required"
+versionRange="[0.6.2,)"
+ordering="AFTER"
+side="BOTH"

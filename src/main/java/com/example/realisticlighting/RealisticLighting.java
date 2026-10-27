@@ -2,6 +2,7 @@
 package com.example.realisticlighting;
 
 import com.example.realisticlighting.config.EnergyConfig;
+import com.example.realisticlighting.config.ClientConfig;
 import net.neoforged.fml.config.ModConfig;
 import com.example.realisticlighting.registry.ModBlocks;
 import com.example.realisticlighting.registry.ModItems;
@@ -29,6 +30,7 @@ public final class RealisticLighting {
 		ModMenus.MENUS.register(modEventBus);
 		
 		modContainer.registerConfig(ModConfig.Type.COMMON, EnergyConfig.SPEC);
+        modContainer.registerConfig(ModConfig.Type.CLIENT, ClientConfig.SPEC);
         
     }
 
