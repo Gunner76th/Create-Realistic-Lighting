@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "lit=false": {
+            "model": "create_realistic_lighting:block/lamp_base"
+        },
+        "lit=true": {
+            "model": "create_realistic_lighting:block/lamp_base_lit"
+        }
+    }
+}

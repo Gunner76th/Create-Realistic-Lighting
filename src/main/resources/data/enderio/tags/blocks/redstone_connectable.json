@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "realistic_lighting:industrial_fixture",
-    "realistic_lighting:square_ceiling_fixture",
-    "realistic_lighting:wall_sconce"
+    "create_realistic_lighting:industrial_fixture",
+    "create_realistic_lighting:square_ceiling_fixture",
+    "create_realistic_lighting:wall_sconce"
   ]
 }

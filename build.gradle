@@ -42,7 +42,8 @@ tasks.named('processResources', ProcessResources).configure {
 
 
 repositories {
-    // Add here additional repositories if required by some of the dependencies below.
+    // Create, Ponder, and Flywheel artifacts.
+    maven { url = "https://maven.createmod.net" }
 }
 
 base {
@@ -233,4 +234,10 @@ dependencies {
 // Architectury API required by Create: Power Grid.
 dependencies {
     compileOnly files('libs/architectury-13.0.11-neoforge.jar')
+}
+
+// Ponder API required by Create's SmartBlockEntity inheritance chain.
+// The matching Ponder runtime is supplied by the installed Create environment.
+dependencies {
+    compileOnly 'net.createmod.ponder:ponder-neoforge:1.0.82+mc1.21.1'
 }
