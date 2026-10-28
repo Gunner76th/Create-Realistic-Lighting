@@ -17,11 +17,12 @@ import java.util.Set;
 
 /** Adaptive, surface-aware directional LED illumination. Server-side only. */
 public final class LedExtendedLighting {
-    private static final int[] RADII = {4, 8, 12, 16, 20, 24};
-    private static final int[] LEVELS = {15, 14, 12, 10, 8, 6};
-    private static final int ANGULAR_SAMPLES = 16;
-    // Interleave neighboring rings to avoid the eight bright radial spokes of Dev.8.
-    // The outer radius and light levels stay unchanged to preserve the tested reach.
+    private static final int[] RADII = {3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 38};
+    // Smaller radial steps and a monotonic falloff reduce visible lighting bands.
+    private static final int[] LEVELS = {15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3};
+    private static final int MIN_ANGULAR_SAMPLES = 16;
+    private static final int MAX_SURFACE_DROP = 28;
+    // Smooth stepped radial falloff; keep the outer sampling radius at 38 blocks.
     private LedExtendedLighting() {}
 
     public static Set<BlockPos> desired(Level level, BlockPos fixture, BlockState fixtureState) {
@@ -29,22 +30,30 @@ public final class LedExtendedLighting {
         if (!fixtureState.hasProperty(IndustrialFixtureBlock.FACING)) return result;
         Direction facing = fixtureState.getValue(IndustrialFixtureBlock.FACING);
         boolean sconce = fixtureState.getBlock() instanceof WallSconceBlock;
-        // Place downward light close to the illuminated surface, not at a fixed depth
-        // below the fixture. This works for ordinary 3-5 block room heights.
-        int floorY = findFloor(level, fixture.below(), 28);
         for (int i = 0; i < RADII.length; i++) {
             int radius = RADII[i];
-            for (int sample = 0; sample < ANGULAR_SAMPLES; sample++) {
-                double angle = (sample + (i % 2 == 0 ? 0.0 : 0.5)) * (2.0 * Math.PI / ANGULAR_SAMPLES);
+            // Keep the spacing between light samples roughly constant as rings expand.
+            int samples = Math.max(MIN_ANGULAR_SAMPLES, (int) Math.ceil(2.0 * Math.PI * radius / 3.5));
+            for (int sample = 0; sample < samples; sample++) {
+                double angle = (sample + (i % 2 == 0 ? 0.0 : 0.5)) * (2.0 * Math.PI / samples);
                 int dx = (int)Math.round(Math.cos(angle) * radius);
                 int dz = (int)Math.round(Math.sin(angle) * radius);
                 BlockPos target;
                 if (facing == Direction.DOWN) {
-                    if (floorY == Integer.MIN_VALUE) continue;
-                    target = findSurfaceAir(level, fixture.offset(dx, 0, dz), floorY);
+                    target = findVisibleSurfaceAir(level, fixture, dx, dz, facing);
                 } else if (facing == Direction.UP) {
-                    // Upward installations spread their beam horizontally while rising.
-                    target = fixture.offset(dx, Math.max(1, radius / 2), dz);
+                    // Ground-mounted upward fixtures illuminate both the surrounding
+                    // walkable surfaces and the space above them. Keep the existing
+                    // upward beam, but also place a separate ground-level node.
+                    BlockPos upward = fixture.offset(dx, Math.max(1, radius / 2), dz);
+                    if (level.isInWorldBounds(upward) && level.hasChunkAt(upward)) {
+                        BlockState upwardState = level.getBlockState(upward);
+                        if ((upwardState.isAir() || upwardState.is(ModBlocks.LED_LIGHT_NODE.get()))
+                                && clearRay(level, fixture, upward, facing)) {
+                            result.add(upward.immutable());
+                        }
+                    }
+                    target = findVisibleSurfaceAir(level, fixture, dx, dz, facing);
                 } else {
                     // Forward cone: spread sideways and downward from the wall fixture.
                     int forward = radius;
@@ -64,29 +73,30 @@ public final class LedExtendedLighting {
         return result;
     }
 
-    private static int findFloor(Level level, BlockPos start, int maxDrop) {
-        for (int i = 0; i < maxDrop; i++) {
-            BlockPos p = start.below(i);
-            if (!level.isInWorldBounds(p) || !level.hasChunkAt(p)) return Integer.MIN_VALUE;
-            if (level.getBlockState(p).isCollisionShapeFullBlock(level, p)) return p.getY();
-        }
-        return Integer.MIN_VALUE;
-    }
+    /** Find a visible surface independently in each sampled column. */
+    private static BlockPos findVisibleSurfaceAir(
+            Level level, BlockPos fixture, int dx, int dz, Direction facing) {
+        int x = fixture.getX() + dx;
+        int z = fixture.getZ() + dz;
+        int highestY = fixture.getY() - 1;
+        int lowestY = highestY - MAX_SURFACE_DROP + 1;
 
-    private static BlockPos findSurfaceAir(Level level, BlockPos column, int referenceFloor) {
-        // Follow modest terrain variation; never drill through a roof or wall.
-        for (int y = referenceFloor + 3; y >= referenceFloor - 3; y--) {
-            BlockPos ground = new BlockPos(column.getX(), y, column.getZ());
+        for (int y = highestY; y >= lowestY; y--) {
+            BlockPos ground = new BlockPos(x, y, z);
             BlockPos above = ground.above();
-            if (!level.isInWorldBounds(above) || !level.hasChunkAt(ground)) return null;
-            if (level.getBlockState(ground).isCollisionShapeFullBlock(level, ground)
-                && (level.getBlockState(above).isAir() || level.getBlockState(above).is(ModBlocks.LED_LIGHT_NODE.get())))
-                return above;
+            if (!level.isInWorldBounds(ground) || !level.isInWorldBounds(above)
+                    || !level.hasChunkAt(ground) || !level.hasChunkAt(above)) return null;
+
+            BlockState surface = level.getBlockState(ground);
+            BlockState air = level.getBlockState(above);
+            if (!surface.isCollisionShapeFullBlock(level, ground)) continue;
+            if (!air.isAir() && !air.is(ModBlocks.LED_LIGHT_NODE.get())) continue;
+
+            // A roof must not allow light nodes to appear on floors below it.
+            return clearRay(level, fixture, above, facing) ? above : null;
         }
         return null;
     }
-
-
 
 private static boolean clearRay(
         Level level,
@@ -125,7 +135,14 @@ private static boolean clearRay(
         double distance = facing.getAxis() == Direction.Axis.Y
             ? Math.hypot(node.getX() - fixture.getX(), node.getZ() - fixture.getZ())
             : Math.abs((node.getX() - fixture.getX()) * facing.getStepX() + (node.getZ() - fixture.getZ()) * facing.getStepZ());
-        for (int i = 0; i < RADII.length; i++) if (distance <= RADII[i] + 1) return LEVELS[i];
+        if (distance <= RADII[0]) return LEVELS[0];
+        for (int i = 1; i < RADII.length; i++) {
+            if (distance <= RADII[i]) {
+                double fraction = (distance - RADII[i - 1]) / (RADII[i] - RADII[i - 1]);
+                return Math.max(1, Math.min(15,
+                    (int) Math.round(LEVELS[i - 1] + fraction * (LEVELS[i] - LEVELS[i - 1]))));
+            }
+        }
         return LEVELS[LEVELS.length - 1];
     }
 
