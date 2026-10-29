@@ -1,182 +1,150 @@
-
 # Create: Realistic Lighting
 
-A Minecraft Java Edition 1.21.1 NeoForge mod bringing replaceable light bulbs, industrial lighting fixtures, and realistic electrical behavior to the Create ecosystem.
+A Minecraft Java Edition **1.21.1 NeoForge** mod that brings replaceable light bulbs, industrial lighting fixtures, and native **Create: Power Grid** electricity to the Create ecosystem.
 
-> **Development status:** Work in progress. The native Create: Power Grid electrical integration is currently being researched and has not yet replaced the existing FE-based lighting system.
+> **Current release: [1.0.0-alpha2](https://github.com/Gunner76th/Create-Realistic-Lighting/releases/tag/v1.0.0-alpha2)** — Public alpha for testing. Native Create: Power Grid electrical integration is implemented; voltage-dependent bulb behavior is planned for Alpha 3.
 
 ## Overview
 
-Create: Realistic Lighting is an independent successor project based on Realistic Lighting. Its goal is to integrate realistic lighting fixtures and electrical consumption into the Create ecosystem using Create: Power Grid's native electrical network.
+Create: Realistic Lighting is an independent project based on the original Realistic Lighting mod. It uses **Create: Power Grid's native electrical network**, not the original project's Forge Energy (FE/RF) storage system.
 
-This repository is separate from the original Realistic Lighting project and follows its own development roadmap.
+The original Realistic Lighting project remains separate and follows its own development roadmap.
 
 ## Current Features
 
+### Native Create: Power Grid Electricity
+
+- Fixtures participate in Create: Power Grid's electrical circuits.
+- Each fixture provides **four connection terminals**: live-in, neutral-in, live-out, and neutral-out, allowing power to continue downstream.
+- Installed bulb type determines the fixture's electrical load.
+- The fixture GUI displays electrical readings derived from the Power Grid circuit.
+- On / Off / Redstone operating modes control the fixture's load and light output.
+- The current implementation uses a **120 V nominal** electrical model, with a **90 V minimum operating threshold**. More detailed voltage effects are planned for Alpha 3.
+
+| Bulb | Nominal power | Nominal resistance at 120 V |
+| --- | ---: | ---: |
+| Incandescent | 60 W | 240 Ω |
+| Fluorescent | 30 W | 480 Ω |
+| LED | 15 W | 960 Ω |
+| Grow Bulb | 45 W | 320 Ω |
+
+These are the implemented nominal load values, not a claim that all planned undervoltage and overvoltage effects are complete.
+
 ### Lighting Fixtures
 
-- Industrial Cage Fixture with a dark gray default appearance
-- Square Flush-Mount Ceiling Light
-- Wall-Mounted Sconce
-- Sixteen vanilla dye colors for fixture metalwork
-- Separate, replaceable bulbs
+- **Industrial Cage Fixture** with a dark gray default appearance and support for all 16 vanilla dye colors on its metalwork
+- **Square Flush-Mount Ceiling Light**
+- **Wall-Mounted Sconce**
+- Separate, replaceable bulb items
 - Fixture-specific GUI titles and controls
 
 ### Light Bulbs
 
 | Bulb | Active-use lifespan | Characteristics |
 | --- | --- | --- |
-| Incandescent | 30 Minecraft days | Traditional lighting |
-| Fluorescent | 90 Minecraft days | More efficient lighting |
-| LED | 300 Minecraft days | Extended directional lighting |
-| Grow Bulb | 90 Minecraft days | Accelerates nearby crop growth |
+| Incandescent | 30 Minecraft days | Traditional lighting; 60 W nominal |
+| Fluorescent | 90 Minecraft days | Efficient lighting; 30 W nominal |
+| LED | 300 Minecraft days | Extended, terrain-aware illumination; 15 W nominal |
+| Grow Bulb | 90 Minecraft days | Accelerates nearby crop growth; 45 W nominal |
 
 Bulb wear is tracked during operation and preserved when bulbs are removed and reinstalled.
 
 ### Fixture Controls
 
-The fixture GUI supports three operating modes:
+Each fixture GUI supports three modes:
 
-- **On:** Operates when a usable bulb and sufficient power are available.
+- **On:** Operates when a usable bulb and sufficient electrical power are available.
 - **Off:** Forces the fixture off.
 - **Redstone:** Operates only while receiving a redstone signal, provided the bulb and power requirements are met.
 
-### Additional Lighting Features
+### Alpha 2 Lighting and Growing Improvements
 
-- Extended directional lighting from LED bulbs
-- Crop growth acceleration from Grow Bulbs
-- Persistent bulb age and fixture settings
-- Configurable electrical consumption and energy storage in the current legacy implementation
+**LED bulbs**
+- Extended illumination over a wider surrounding area
+- Terrain-aware light placement and obstruction checks
+- Smoother brightness falloff between illuminated areas
+- Improved ground-level coverage for upward-facing fixtures
+
+**Grow Bulbs**
+- Directional crop-growth acceleration based on fixture orientation
+- Centered **5×5** crop coverage beneath overhead fixtures
+- Solid-block obstruction checks
+- Multiple powered Grow Bulbs contribute with diminishing returns
+
+Alpha 2 was tested in-game, including multiple simultaneously powered LED fixtures, crop-growth comparisons, overlapping Grow Bulbs, and obstruction checks. These tests do not constitute exhaustive multiplayer or long-duration performance validation.
 
 ## Photosensitivity and Accessibility
 
-The project includes a first-launch photosensitivity warning.
+The project includes a first-launch photosensitivity warning. Players can acknowledge it and save a client preference for bulb flickering.
 
-Players can acknowledge the warning and choose whether to enable or disable bulb flickering. Their selection is saved in the client configuration file.
-
-The warning screen and preference persistence have been tested in the Minecraft client.
-
-**Important:** The flickering effect and its connection to the saved preference are not yet implemented. Disabling flickering currently saves the preference for future use.
-
-## Planned Electrical Integration
-
-The project is migrating from its inherited Forge Energy (FE) system to native Create: Power Grid electricity.
-
-The planned electrical model includes:
-
-- Native Power Grid wire connections
-- Two electrical terminals per fixture
-- Voltage-dependent lighting behavior
-- Electrical resistance and power consumption based on bulb type
-- Low-voltage dimming or flickering, depending on bulb technology
-- Overvoltage damage and accelerated bulb wear
-- Electrical switching controlled by the fixture GUI and redstone
-
-The intended nominal operating voltage is 120 V.
-
-| Bulb | Nominal power | Planned resistance |
-| --- | ---: | ---: |
-| Incandescent | 60 W | 240 ohms |
-| Fluorescent | 30 W | 480 ohms |
-| LED | 15 W | 960 ohms |
-| Grow Bulb | 45 W | 320 ohms |
-
-These electrical values describe the planned integration, not functionality currently available in the compiled mod.
-
-The eventual goal is to remove the inherited FE/RF implementation and use Power Grid electricity exclusively.
+**Important:** The warning and preference persistence are implemented, but the planned voltage-related flicker effect and its integration with that preference are **not yet implemented**.
 
 ## Requirements
 
-Development currently targets:
+- Minecraft Java Edition **1.21.1**
+- **NeoForge 21.1.264**
+- **Java 21**
+- **Create 6.0.10**
+- **Create: Power Grid 0.6.2**
+- **Architectury API 13.0.11**
+- **Ponder 1.0.82**
 
-- Minecraft Java Edition 1.21.1
-- NeoForge 21.1.264
-- Java 21
-- Create 6.0.10
-- Create: Power Grid 0.6.2
-- Architectury API 13.0.11
-
-Dependency versions may change during development.
-
-## Building
-
-On Windows, from the development directory:
-
-```powershell
-.\gradlew.bat build --offline
-```
-
-The compiled mod JAR is generated in `build/libs/`.
-
-This project is currently tested using compiled JARs installed in an actual Minecraft client or dedicated server environment, rather than Gradle's development game launch tasks.
-
-Local third-party dependency JARs may be required in the development environment. They are not included in this repository.
+Use compatible dependency versions as required by your modpack and loader.
 
 ## Installation
 
-This project is under active development and is not yet intended as a stable public release.
-
-For development testing:
-
 1. Install Minecraft 1.21.1 with the supported NeoForge version.
-2. Install Create, Create: Power Grid, and Architectury API.
-3. Build Create: Realistic Lighting.
-4. Place the compiled mod JAR in the Minecraft instance's `mods` folder.
-5. Start Minecraft and verify the installed mod and its dependencies.
+2. Install Create, Create: Power Grid, Architectury API, and the required Ponder dependency.
+3. Download the current alpha JAR from [GitHub Releases](https://github.com/Gunner76th/Create-Realistic-Lighting/releases).
+4. Place the JAR in your Minecraft instance's `mods` folder.
+5. Start Minecraft and verify the mod and its dependencies load correctly.
 
-Always back up existing worlds before testing development builds.
+**Alpha software:** Back up existing worlds before testing or updating.
+
+## Building
+
+From the project development directory on Windows:
+
+```powershell
+.\gradlew.bat clean build --offline
+```
+
+The resulting JAR is placed in `build/libs/`. The offline build requires previously cached dependencies; local third-party development dependency JARs may also be needed. The project has been tested using built JARs in Minecraft rather than Gradle's development game launch tasks.
 
 ## Configuration
 
-The current implementation uses TOML configuration files for common and client settings.
+Common and client settings use TOML configuration files. Configuration changes are intended to take effect after restarting Minecraft, not through live reloads.
 
-Client settings include:
+Client settings include the photosensitivity warning acknowledgment and the saved flicker preference. Some inherited configuration entries may remain during the migration; they should not be interpreted as evidence that the fixtures still use FE/RF power.
 
-- First-launch photosensitivity warning acknowledgment
-- Bulb flickering preference
+## Development Roadmap
 
-Common settings currently include inherited FE consumption and fixture energy storage values. These will be revised as the native Power Grid integration progresses.
+### Alpha 1 — Released
 
-Configuration changes are intended to take effect after restarting Minecraft, rather than being applied live.
+- Native Create: Power Grid integration and circuit-based electrical loads
+- Three functional fixture families and four replaceable bulb types
+- On / Off / Redstone controls and bulb lifespans
+- Photosensitivity warning and saved client preferences
 
-The internal mod ID and configuration filenames have not yet been migrated to the final Create: Realistic Lighting naming scheme.
+### Alpha 2 — Released
 
-## Development Status
+- Extended, surface-aware LED illumination and smoother falloff
+- Directional Grow Bulb acceleration, overhead 5×5 coverage, obstruction handling, and diminishing returns
 
-### Implemented and Tested
+See [Alpha 2 release notes](RELEASE_NOTES_ALPHA2.md) on the Alpha 2 development branch or the [published release](https://github.com/Gunner76th/Create-Realistic-Lighting/releases/tag/v1.0.0-alpha2).
 
-- Existing replaceable-bulb fixture system
-- Four bulb types with finite operating lifespans
-- On / Off / Redstone fixture controls
-- Dyeable industrial-style fixtures
-- Extended LED lighting
-- Grow Bulb crop acceleration
-- First-launch photosensitivity warning
-- Persistent client photosensitivity and flickering preferences
+### Alpha 3 — Planned
 
-### In Progress
-
-- Native Create: Power Grid electrical architecture
-- Electrical terminal placement and wire compatibility
-- Migration of fixture block entities to Power Grid's circuit system
-
-### Planned
-
-- Complete removal of legacy FE/RF power handling
-- Voltage-sensitive bulb operation
-- Bulb-specific dimming and flickering
-- Overvoltage damage and electrical failure behavior
-- Integration of the client flickering preference with actual lighting effects
-- Final mod ID and configuration filename migration
-- Dedicated multiplayer and regression testing of the completed electrical system
+- Incandescent undervoltage dimming
+- Low-voltage flickering for fluorescent, LED, and Grow Bulbs
+- Voltage-dependent wear, including LED undervoltage wear
+- Overvoltage damage and burnout thresholds
+- Integration of the client flicker preference with actual effects
+- Further dedicated-server and multiplayer regression testing
 
 ## Project History
 
-Create: Realistic Lighting is being developed as a separate project based on the original Realistic Lighting mod.
-
-The original project targeted Minecraft 1.20.1 and Forge, with FE-based electrical systems and optional technology-mod integrations.
-
-This project targets Minecraft 1.21.1 and NeoForge, with a new electrical architecture built around Create: Power Grid.
+The original Realistic Lighting mod targeted Forge 1.20.1 and also has a separate NeoForge development line. **Create: Realistic Lighting** is an independent Minecraft 1.21.1 NeoForge project with native Create: Power Grid electricity. Changes to this repository do not modify the original mod.
 
 ## License
 
