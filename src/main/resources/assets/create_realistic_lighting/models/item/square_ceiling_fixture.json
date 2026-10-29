@@ -1,0 +1,120 @@
+{
+    "parent":  "create_realistic_lighting:block/square_ceiling_fixture_gray_0_off",
+    "display":  {
+                    "gui":  {
+                                "rotation":  [
+                                                 180,
+                                                 0,
+                                                 0
+                                             ],
+                                "translation":  [
+                                                    0,
+                                                    0,
+                                                    0
+                                                ],
+                                "scale":  [
+                                              0.85,
+                                              0.85,
+                                              0.85
+                                          ]
+                            }
+                },
+    "overrides":  [
+                      {
+                          "predicate":  {
+                                            "create_realistic_lighting:fixture_color":  0
+                                        },
+                          "model":  "create_realistic_lighting:block/square_ceiling_fixture_white_0_off"
+                      },
+                      {
+                          "predicate":  {
+                                            "create_realistic_lighting:fixture_color":  1
+                                        },
+                          "model":  "create_realistic_lighting:block/square_ceiling_fixture_orange_0_off"
+                      },
+                      {
+                          "predicate":  {
+                                            "create_realistic_lighting:fixture_color":  2
+                                        },
+                          "model":  "create_realistic_lighting:block/square_ceiling_fixture_magenta_0_off"
+                      },
+                      {
+                          "predicate":  {
+                                            "create_realistic_lighting:fixture_color":  3
+                                        },
+                          "model":  "create_realistic_lighting:block/square_ceiling_fixture_light_blue_0_off"
+                      },
+                      {
+                          "predicate":  {
+                                            "create_realistic_lighting:fixture_color":  4
+                                        },
+                          "model":  "create_realistic_lighting:block/square_ceiling_fixture_yellow_0_off"
+                      },
+                      {
+                          "predicate":  {
+                                            "create_realistic_lighting:fixture_color":  5
+                                        },
+                          "model":  "create_realistic_lighting:block/square_ceiling_fixture_lime_0_off"
+                      },
+                      {
+                          "predicate":  {
+                                            "create_realistic_lighting:fixture_color":  6
+                                        },
+                          "model":  "create_realistic_lighting:block/square_ceiling_fixture_pink_0_off"
+                      },
+                      {
+                          "predicate":  {
+                                            "create_realistic_lighting:fixture_color":  7
+                                        },
+                          "model":  "create_realistic_lighting:block/square_ceiling_fixture_gray_0_off"
+                      },
+                      {
+                          "predicate":  {
+                                            "create_realistic_lighting:fixture_color":  8
+                                        },
+                          "model":  "create_realistic_lighting:block/square_ceiling_fixture_light_gray_0_off"
+                      },
+                      {
+                          "predicate":  {
+                                            "create_realistic_lighting:fixture_color":  9
+                                        },
+                          "model":  "create_realistic_lighting:block/square_ceiling_fixture_cyan_0_off"
+                      },
+                      {
+                          "predicate":  {
+                                            "create_realistic_lighting:fixture_color":  10
+                                        },
+                          "model":  "create_realistic_lighting:block/square_ceiling_fixture_purple_0_off"
+                      },
+                      {
+                          "predicate":  {
+                                            "create_realistic_lighting:fixture_color":  11
+                                        },
+                          "model":  "create_realistic_lighting:block/square_ceiling_fixture_blue_0_off"
+                      },
+                      {
+                          "predicate":  {
+                                            "create_realistic_lighting:fixture_color":  12
+                                        },
+                          "model":  "create_realistic_lighting:block/square_ceiling_fixture_brown_0_off"
+                      },
+                      {
+                          "predicate":  {
+                                            "create_realistic_lighting:fixture_color":  13
+                                        },
+                          "model":  "create_realistic_lighting:block/square_ceiling_fixture_green_0_off"
+                      },
+                      {
+                          "predicate":  {
+                                            "create_realistic_lighting:fixture_color":  14
+                                        },
+                          "model":  "create_realistic_lighting:block/square_ceiling_fixture_red_0_off"
+                      },
+                      {
+                          "predicate":  {
+                                            "create_realistic_lighting:fixture_color":  15
+                                        },
+                          "model":  "create_realistic_lighting:block/square_ceiling_fixture_black_0_off"
+                      }
+                  ]
+}
