@@ -86,6 +86,8 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
   private double currentAmps;
   private double powerWatts;
   private static final double MINIMUM_VOLTAGE = 90.0;
+  private static final double SHUTDOWN_VOLTAGE = 100.0;
+  private static final double RECOVERY_VOLTAGE = 105.0;
   private static final double NOMINAL_VOLTAGE = 120.0;
 
   private double nominalPower() {
@@ -137,6 +139,7 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
     runLightingTick();
   }
 
+  private boolean voltageEligible = false;
   private boolean lastLit;
   private final Set<BlockPos> ledNodes = new HashSet<>();
 
@@ -170,7 +173,7 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
     return enabled()
         && bulb.is(ModItems.LED_BULB.get())
         && ageTicks < lifespan()
-        && voltage >= MINIMUM_VOLTAGE;
+        && isVoltageEligible();
   }
 
   public LampBaseBlockEntity(BlockPos pos, BlockState state) {
@@ -235,9 +238,29 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
     return 0;
   }
 
+  private boolean isVoltageEligible() {
+    return bulb.is(ModItems.INCANDESCENT_BULB.get())
+        ? voltage >= MINIMUM_VOLTAGE
+        : voltageEligible;
+  }
+
+  private boolean hasSufficientVoltage() {
+    if (bulb.is(ModItems.INCANDESCENT_BULB.get())) {
+      return voltage >= MINIMUM_VOLTAGE;
+    }
+
+    if (voltage < SHUTDOWN_VOLTAGE) {
+      voltageEligible = false;
+    } else if (voltage >= RECOVERY_VOLTAGE) {
+      voltageEligible = true;
+    }
+
+    return voltageEligible;
+  }
   private void runLightingTick() {
     if (level == null || level.isClientSide) return;
-    boolean lit = canDrawPower() && voltage >= MINIMUM_VOLTAGE;
+    boolean sufficientVoltage = hasSufficientVoltage();
+    boolean lit = canDrawPower() && sufficientVoltage;
     if (lit) {
       ageTicks++;
       if (bulb.is(ModItems.GROW_BULB.get()) && level.getGameTime() % 20 == 0)
@@ -265,7 +288,7 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
         enabled()
             && !bulb.isEmpty()
             && ageTicks < lifespan()
-            && voltage >= MINIMUM_VOLTAGE;
+            && isVoltageEligible();
     BlockState current = getBlockState();
     if (current.hasProperty(IndustrialFixtureBlock.BULB_KIND)) {
       int kind =

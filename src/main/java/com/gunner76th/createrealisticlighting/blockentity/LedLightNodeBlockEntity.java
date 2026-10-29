@@ -30,7 +30,8 @@ public class LedLightNodeBlockEntity extends BlockEntity {
         }
     }
     public void addOwner(BlockPos fixture, int light) {
-        owners.put(fixture.asLong(), light);
+        Integer previous = owners.put(fixture.asLong(), light);
+        if (previous != null && previous == light) return;
         refresh();
     }
     public void removeOwner(BlockPos fixture) {
