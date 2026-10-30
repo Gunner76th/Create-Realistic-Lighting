@@ -51,8 +51,12 @@ public class LampScreen extends AbstractContainerScreen<LampMenu> {
             graphics.fill(x + 1, y + 1, x + 17, y + 17, slotBackground);
         }
         graphics.fill(leftPos + 8, topPos + 58, leftPos + 168, topPos + 67, 0xFF1B2029);
-        int width = (int) Math.min(160L, Math.max(0L, (long) menu.energy() * 160 / Math.max(1, menu.capacity())));
-        graphics.fill(leftPos + 8, topPos + 58, leftPos + 8 + width, topPos + 67, 0xFF4BC6A5);
+        double remaining = menu.remainingLifePercent();
+        int width = (int) Math.round(160.0 * remaining / 100.0);
+        int color = remaining > 50.0 ? 0xFF279A69 : remaining > 20.0 ? 0xFFD6A024 : 0xFFD45449;
+        if (menu.hasBulb() && width > 0) {
+            graphics.fill(leftPos + 8, topPos + 58, leftPos + 8 + width, topPos + 67, color);
+        }
     }
     @Override protected void renderLabels(GuiGraphics graphics, int mouseX, int mouseY) {
         graphics.drawString(font, Component.translatable("itemGroup.create_realistic_lighting"), titleLabelX, 5, 0xFFFFFF, false);
@@ -60,7 +64,11 @@ public class LampScreen extends AbstractContainerScreen<LampMenu> {
         graphics.drawString(font, Component.translatable("gui.create_realistic_lighting.bulb"), 145, 49, 0xFFFFFF, false);
         graphics.drawString(font, String.format(java.util.Locale.ROOT, "Voltage: %.1f V", menu.energy() / 10.0), 8, 27, 0xFFFFFF, false);
         graphics.drawString(font, String.format(java.util.Locale.ROOT, "Power: %.1f W (%s)", menu.cost() / 10.0, menu.lit() ? "Lit" : "Dark"), 8, 37, 0xFFFFFF, false);
-        graphics.drawString(font, Component.translatable("gui.create_realistic_lighting.life", String.format(java.util.Locale.ROOT, "%.1f", Math.max(0, menu.lifespan() - menu.age()) / 24000.0)), 8, 47, 0xFFFFFF, false);
+        if (menu.hasBulb()) {
+            graphics.drawString(font, Component.translatable("gui.create_realistic_lighting.life", String.format(java.util.Locale.ROOT, "%.1f", Math.max(0, menu.lifespan() - menu.age()) / 24000.0)), 8, 47, 0xFFFFFF, false);
+        } else {
+            graphics.drawString(font, "No bulb installed", 8, 47, 0xFFFFFF, false);
+        }
         String[] modes = {"gui.create_realistic_lighting.on", "gui.create_realistic_lighting.off", "gui.create_realistic_lighting.redstone"};
         graphics.drawString(font, Component.translatable("gui.create_realistic_lighting.mode_signal", Component.translatable(modes[Math.max(0, Math.min(2, menu.mode()))]), Component.translatable(menu.redstone() ? "gui.create_realistic_lighting.yes" : "gui.create_realistic_lighting.no")), 8, 69, 0xFFFFFF, false);
         graphics.drawString(font, Component.translatable("container.inventory"), 8, inventoryLabelY, 0xFFFFFF, false);

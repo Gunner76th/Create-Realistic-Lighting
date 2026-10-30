@@ -59,8 +59,8 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
   public int getPowerTenths() { return (int) Math.round(Math.min(32767, powerWatts * 10)); }
   public int getCurrentMilliamps() { return (int) Math.round(Math.min(32767, currentAmps * 1000)); }
 
-  public long getAgeTicks() {
-    return ageTicks;
+  public double getAccumulatedWear() {
+    return accumulatedWear;
   }
 
   public int getEnergyCost() { return (int) Math.round(nominalPower()); }
@@ -80,7 +80,7 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
   }
 
   private ItemStack bulb = ItemStack.EMPTY;
-  private long ageTicks = 0;
+  private double accumulatedWear = 0.0;
   private transient SwitchedWire loadWire;
   private double voltage;
   private double currentAmps;
@@ -103,7 +103,7 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
 
   private boolean canDrawPower() {
     // Safe during superclass construction and while the fixture has no bulb.
-    return bulb != null && enabled() && !bulb.isEmpty() && ageTicks < lifespan();
+    return bulb != null && enabled() && !bulb.isEmpty() && accumulatedWear < lifespan();
   }
 
   private void updateLoad() {
@@ -172,7 +172,7 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
   public boolean isExtendedLedActive() {
     return enabled()
         && bulb.is(ModItems.LED_BULB.get())
-        && ageTicks < lifespan()
+        && accumulatedWear < lifespan()
         && isVoltageEligible();
   }
 
@@ -184,17 +184,17 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
     return bulb;
   }
 
-  private static final String BULB_AGE_KEY = "RealisticLightingAgeTicks";
+  private static final String BULB_WEAR_KEY = "RealisticLightingAccumulatedWear";
 
   public void setBulb(ItemStack stack) {
     bulb = stack.copyWithCount(1);
 
     if (bulb.isEmpty()) {
-      ageTicks = 0;
+      accumulatedWear = 0.0;
     } else {
       CustomData data = bulb.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
 
-      ageTicks = Mth.clamp(data.copyTag().getLong(BULB_AGE_KEY), 0L, lifespan());
+      accumulatedWear = sanitizeWear(data.copyTag().getDouble(BULB_WEAR_KEY), lifespan());
     }
 
     updateLitState();
@@ -209,7 +209,7 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
       CompoundTag data =
           result.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
 
-      data.putLong(BULB_AGE_KEY, ageTicks);
+      data.putDouble(BULB_WEAR_KEY, accumulatedWear);
 
       result.set(DataComponents.CUSTOM_DATA, CustomData.of(data));
     }
@@ -221,13 +221,19 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
     ItemStack result = getBulbDrop();
 
     bulb = ItemStack.EMPTY;
-    ageTicks = 0;
+    accumulatedWear = 0.0;
 
     updateLitState();
     setChanged();
     sync();
 
     return result;
+  }
+
+  // Reject invalid NBT values and keep wear within the bulb's rated lifespan.
+  private static double sanitizeWear(double wear, long ratedLifespan) {
+    if (!Double.isFinite(wear)) return 0.0;
+    return Mth.clamp(wear, 0.0, (double) ratedLifespan);
   }
 
   private long lifespan() {
@@ -270,7 +276,7 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
     boolean sufficientVoltage = hasSufficientVoltage();
     boolean lit = canDrawPower() && sufficientVoltage;
     if (lit) {
-      ageTicks++;
+      accumulatedWear += 1.0;
       if (bulb.is(ModItems.GROW_BULB.get()) && level.getGameTime() % 20 == 0)
         com.gunner76th.createrealisticlighting.logic.GrowLampGrowth.apply(level, worldPosition);
     }
@@ -296,7 +302,7 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
     boolean shouldLight =
         enabled()
             && !bulb.isEmpty()
-            && ageTicks < lifespan()
+            && accumulatedWear < lifespan()
             && isVoltageEligible();
     BlockState current = getBlockState();
     if (current.hasProperty(IndustrialFixtureBlock.BULB_KIND)) {
@@ -338,7 +344,7 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
       tag.put("Bulb", bulb.save(registries));
     }
 
-    tag.putLong("AgeTicks", ageTicks);
+    tag.putDouble("AccumulatedWear", accumulatedWear);
     tag.putInt("OperatingMode", operatingMode);
 
     long[] nodes = ledNodes.stream().mapToLong(BlockPos::asLong).toArray();
@@ -355,7 +361,7 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
             ? ItemStack.parseOptional(registries, tag.getCompound("Bulb"))
             : ItemStack.EMPTY;
 
-    ageTicks = tag.getLong("AgeTicks");
+    accumulatedWear = sanitizeWear(tag.getDouble("AccumulatedWear"), lifespan());
 
     operatingMode = Math.max(0, Math.min(2, tag.getInt("OperatingMode")));
 

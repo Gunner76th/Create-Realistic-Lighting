@@ -60,8 +60,8 @@ public LampMenu(
                 return switch (index) {
                     case 0 -> lamp.getVoltageTenths() & 0xFFFF;
                     case 1 -> (lamp.getVoltageTenths() >>> 16) & 0xFFFF;
-                    case 2 -> (int) (lamp.getAgeTicks() & 0xFFFF);
-                    case 3 -> (int) ((lamp.getAgeTicks() >>> 16) & 0xFFFF);
+                    case 2 -> (int) (((long) lamp.getAccumulatedWear()) & 0xFFFF);
+                    case 3 -> (int) ((((long) lamp.getAccumulatedWear()) >>> 16) & 0xFFFF);
                     case 4 -> (int) (lamp.getLifespanTicks() & 0xFFFF);
                     case 5 -> (int) ((lamp.getLifespanTicks() >>> 16) & 0xFFFF);
                     case 6 -> lamp.getPowerTenths();
@@ -128,10 +128,13 @@ addSlot(new Slot(bulbInventory, 0, 149, 31) {
         return stack.is(ModItems.INCANDESCENT_BULB.get()) || stack.is(ModItems.FLUORESCENT_BULB.get()) || stack.is(ModItems.LED_BULB.get()) || stack.is(ModItems.GROW_BULB.get());
     }
     private int combined(int low, int high) { return (data.get(low) & 0xFFFF) | ((data.get(high) & 0xFFFF) << 16); }
-    public int capacity() { return combined(10, 11); }
     public int energy() { return combined(0, 1); }
     public int age() { return combined(2, 3); }
     public int lifespan() { return combined(4, 5); }
+    public boolean hasBulb() { return lifespan() > 0; }
+    public double remainingLifePercent() {
+        return hasBulb() ? Math.max(0.0, Math.min(100.0, 100.0 * (1.0 - (double) age() / lifespan()))) : 0.0;
+    }
     public int cost() { return data.get(6); }
     public int mode() { return data.get(7); }
     public boolean redstone() { return data.get(8) == 1; }
