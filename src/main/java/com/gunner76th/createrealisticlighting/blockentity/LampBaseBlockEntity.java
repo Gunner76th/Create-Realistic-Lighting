@@ -85,7 +85,7 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
   private double voltage;
   private double currentAmps;
   private double powerWatts;
-  private static final double MINIMUM_VOLTAGE = 90.0;
+  private static final double MINIMUM_VOLTAGE = 60.0;
   private static final double SHUTDOWN_VOLTAGE = 100.0;
   private static final double RECOVERY_VOLTAGE = 105.0;
   private static final double NOMINAL_VOLTAGE = 120.0;
@@ -257,6 +257,14 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
 
     return voltageEligible;
   }
+  private int desiredLightLevel(boolean lit) {
+    if (!lit) return 0;
+    if (!bulb.is(ModItems.INCANDESCENT_BULB.get())) return 15;
+    double normalized = Mth.clamp((voltage - MINIMUM_VOLTAGE) /
+        (NOMINAL_VOLTAGE - MINIMUM_VOLTAGE), 0.0, 1.0);
+    return Mth.clamp((int) Math.round(1.0 + 14.0 * Math.pow(normalized, 1.5)), 1, 15);
+  }
+
   private void runLightingTick() {
     if (level == null || level.isClientSide) return;
     boolean sufficientVoltage = hasSufficientVoltage();
@@ -266,7 +274,8 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
       if (bulb.is(ModItems.GROW_BULB.get()) && level.getGameTime() % 20 == 0)
         com.gunner76th.createrealisticlighting.logic.GrowLampGrowth.apply(level, worldPosition);
     }
-    if (lastLit != lit) {
+    int desiredLightLevel = desiredLightLevel(lit);
+    if (lastLit != lit || getBlockState().getValue(LampBaseBlock.LIGHT_LEVEL) != desiredLightLevel) {
       lastLit = lit;
       updateLitState();
       sync();
@@ -304,9 +313,14 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
         level.setBlock(worldPosition, current, 3);
       }
     }
+    int lightLevel = desiredLightLevel(shouldLight);
     if (current.hasProperty(LampBaseBlock.LIT)
-        && current.getValue(LampBaseBlock.LIT) != shouldLight)
-      level.setBlock(worldPosition, current.setValue(LampBaseBlock.LIT, shouldLight), 3);
+        && (current.getValue(LampBaseBlock.LIT) != shouldLight
+            || current.getValue(LampBaseBlock.LIGHT_LEVEL) != lightLevel)) {
+      level.setBlock(worldPosition,
+          current.setValue(LampBaseBlock.LIT, shouldLight)
+              .setValue(LampBaseBlock.LIGHT_LEVEL, lightLevel), 3);
+    }
     lastLit = shouldLight;
     updateLedNodes(shouldLight && bulb.is(ModItems.LED_BULB.get()));
   }

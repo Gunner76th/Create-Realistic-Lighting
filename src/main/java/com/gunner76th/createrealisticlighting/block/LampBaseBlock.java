@@ -100,15 +100,17 @@ public class LampBaseBlock extends BaseEntityBlock
   }
 
   public static final BooleanProperty LIT = BooleanProperty.create("lit");
+  public static final net.minecraft.world.level.block.state.properties.IntegerProperty LIGHT_LEVEL =
+      net.minecraft.world.level.block.state.properties.IntegerProperty.create("light_level", 0, 15);
 
   public LampBaseBlock(Properties properties) {
     super(properties);
-    registerDefaultState(stateDefinition.any().setValue(LIT, false));
+    registerDefaultState(stateDefinition.any().setValue(LIT, false).setValue(LIGHT_LEVEL, 0));
   }
 
   @Override
   protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-    builder.add(LIT);
+    builder.add(LIT, LIGHT_LEVEL);
   }
 
   /**

@@ -30,7 +30,7 @@ private static Block.Properties properties(String name) {
                 .sound(SoundType.METAL)
                 .noOcclusion()
                 .lightLevel(state ->
-                        state.getValue(LampBaseBlock.LIT) ? 15 : 0);
+                        state.getValue(LampBaseBlock.LIGHT_LEVEL));
     }
 
     public static final DeferredBlock<IndustrialFixtureBlock> INDUSTRIAL_FIXTURE =
