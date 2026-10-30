@@ -141,6 +141,8 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
 
   private boolean voltageEligible = false;
   private boolean lastLit;
+  // Electrical simulation may run multiple times per Minecraft game tick.
+  private long lastWearGameTick = Long.MIN_VALUE;
   private final Set<BlockPos> ledNodes = new HashSet<>();
 
   /** Reconcile periodically to handle changed obstacles and node replacement. */
@@ -244,6 +246,70 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
     return 0;
   }
 
+  private double instantBurnoutVoltage() {
+    if (bulb.is(ModItems.INCANDESCENT_BULB.get())) return 180.0;
+    if (bulb.is(ModItems.FLUORESCENT_BULB.get())) return 160.0;
+    if (bulb.is(ModItems.LED_BULB.get())) return 150.0;
+    if (bulb.is(ModItems.GROW_BULB.get())) return 160.0;
+    return Double.POSITIVE_INFINITY;
+  }
+
+  // Piecewise-linear overvoltage wear, using the approved Alpha 3 balance points.
+  // Instant burnout is handled separately before wear is accumulated.
+  private double overvoltageWearMultiplier() {
+    if (voltage <= 125.0) return 1.0;
+    final double[] volts;
+    final double[] multipliers;
+    if (bulb.is(ModItems.INCANDESCENT_BULB.get())) {
+      volts = new double[] {125, 130, 140, 150, 160, 180};
+      multipliers = new double[] {1, 1.5, 2.5, 4, 6, 6};
+    } else if (bulb.is(ModItems.FLUORESCENT_BULB.get()) || bulb.is(ModItems.GROW_BULB.get())) {
+      volts = new double[] {125, 130, 140, 150, 160};
+      multipliers = new double[] {1, 2, 4, 8, 8};
+    } else if (bulb.is(ModItems.LED_BULB.get())) {
+      volts = new double[] {125, 130, 140, 150};
+      multipliers = new double[] {1, 2.5, 6, 6};
+    } else {
+      return 1.0;
+    }
+    for (int i = 1; i < volts.length; i++) {
+      if (voltage < volts[i]) {
+        double fraction = (voltage - volts[i - 1]) / (volts[i] - volts[i - 1]);
+        return multipliers[i - 1] + fraction * (multipliers[i] - multipliers[i - 1]);
+      }
+    }
+    return multipliers[multipliers.length - 1];
+  }
+
+  // Incandescent filaments age more slowly when operated below 115 V.
+  // Preserve a small nonzero wear rate while illuminated.
+  private double incandescentUndervoltageWearMultiplier() {
+    if (!bulb.is(ModItems.INCANDESCENT_BULB.get()) || voltage >= 115.0) return 1.0;
+    return Math.max(0.05, Math.pow(Math.max(0.0, voltage) / 115.0, 12.0));
+  }
+
+  // LED driver electronics accumulate extra wear under nominal voltage.
+  // Linear interpolation follows the approved Alpha 3 undervoltage balance points.
+  private double ledUndervoltageWearMultiplier() {
+    if (!bulb.is(ModItems.LED_BULB.get()) || voltage >= 120.0) return 1.0;
+    final double[] volts = {100.0, 105.0, 110.0, 115.0, 120.0};
+    final double[] multipliers = {2.5, 2.0, 1.5, 1.2, 1.0};
+    if (voltage <= volts[0]) return multipliers[0];
+    for (int i = 1; i < volts.length; i++) {
+      if (voltage <= volts[i]) {
+        double fraction = (voltage - volts[i - 1]) / (volts[i] - volts[i - 1]);
+        return multipliers[i - 1] + fraction * (multipliers[i] - multipliers[i - 1]);
+      }
+    }
+    return 1.0;
+  }
+
+  private double voltageWearMultiplier() {
+    return overvoltageWearMultiplier()
+        * incandescentUndervoltageWearMultiplier()
+        * ledUndervoltageWearMultiplier();
+  }
+
   private boolean isVoltageEligible() {
     return bulb.is(ModItems.INCANDESCENT_BULB.get())
         ? voltage >= MINIMUM_VOLTAGE
@@ -274,11 +340,19 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
   private void runLightingTick() {
     if (level == null || level.isClientSide) return;
     boolean sufficientVoltage = hasSufficientVoltage();
+    if (canDrawPower() && voltage >= instantBurnoutVoltage()) {
+      accumulatedWear = lifespan();
+      updateLoad();
+    }
     boolean lit = canDrawPower() && sufficientVoltage;
-    if (lit) {
-      accumulatedWear += 1.0;
-      if (bulb.is(ModItems.GROW_BULB.get()) && level.getGameTime() % 20 == 0)
-        com.gunner76th.createrealisticlighting.logic.GrowLampGrowth.apply(level, worldPosition);
+    long gameTick = level.getGameTime();
+    if (lastWearGameTick != gameTick) {
+      lastWearGameTick = gameTick;
+      if (lit) {
+        accumulatedWear = Math.min((double) lifespan(), accumulatedWear + voltageWearMultiplier());
+        if (bulb.is(ModItems.GROW_BULB.get()) && gameTick % 20 == 0)
+          com.gunner76th.createrealisticlighting.logic.GrowLampGrowth.apply(level, worldPosition);
+      }
     }
     int desiredLightLevel = desiredLightLevel(lit);
     if (lastLit != lit || getBlockState().getValue(LampBaseBlock.LIGHT_LEVEL) != desiredLightLevel) {

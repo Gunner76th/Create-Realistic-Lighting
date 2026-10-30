@@ -124,6 +124,30 @@ addSlot(new Slot(bulbInventory, 0, 149, 31) {
         for (int col = 0; col < 9; col++) addSlot(new Slot(inventory, col, 8 + col * 18, 174));
     }
 
+    // Keep the displayed bulb ItemStack synchronized with the block entity's
+    // authoritative double-precision wear. The block entity stores active wear
+    // separately and only writes it onto the item when the bulb is removed.
+    // Refresh once per second to avoid sending a slot packet every game tick.
+    @Override
+    public void broadcastChanges() {
+        if (lamp != null && lamp.getLevel() != null
+                && !lamp.getLevel().isClientSide
+                && lamp.getLevel().getGameTime() % 20 == 0) {
+            ItemStack current = lamp.getBulbDrop();
+            ItemStack displayed = bulbInventory.getItem(0);
+            if (!ItemStack.isSameItemSameComponents(current, displayed)
+                    || current.getCount() != displayed.getCount()) {
+                updatingSlot = true;
+                try {
+                    bulbInventory.setItem(0, current);
+                } finally {
+                    updatingSlot = false;
+                }
+            }
+        }
+        super.broadcastChanges();
+    }
+
     private static boolean isBulb(ItemStack stack) {
         return stack.is(ModItems.INCANDESCENT_BULB.get()) || stack.is(ModItems.FLUORESCENT_BULB.get()) || stack.is(ModItems.LED_BULB.get()) || stack.is(ModItems.GROW_BULB.get());
     }
