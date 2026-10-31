@@ -294,3 +294,4 @@ public class LampBaseBlock extends BaseEntityBlock
     return drops;
   }
 }
+
