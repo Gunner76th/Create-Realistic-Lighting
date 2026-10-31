@@ -1,6 +1,6 @@
 package com.gunner76th.createrealisticlighting.registry;
 
-import com.gunner76th.createrealisticlighting.RealisticLighting;
+import com.gunner76th.createrealisticlighting.CreateRealisticLighting;
 import com.gunner76th.createrealisticlighting.block.IndustrialFixtureBlock;
 import com.gunner76th.createrealisticlighting.block.LampBaseBlock;
 import com.gunner76th.createrealisticlighting.block.LedLightNodeBlock;
@@ -17,7 +17,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 public final class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS =
-            DeferredRegister.createBlocks(RealisticLighting.MOD_ID);
+            DeferredRegister.createBlocks(CreateRealisticLighting.MOD_ID);
 
 private static Block.Properties properties(String name) {
     return Block.Properties.of();

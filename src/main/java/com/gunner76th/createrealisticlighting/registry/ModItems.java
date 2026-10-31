@@ -1,6 +1,6 @@
 package com.gunner76th.createrealisticlighting.registry;
 
-import com.gunner76th.createrealisticlighting.RealisticLighting;
+import com.gunner76th.createrealisticlighting.CreateRealisticLighting;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -19,7 +19,7 @@ import net.neoforged.neoforge.registries.DeferredItem;
 
 public final class ModItems {
     public static final DeferredRegister.Items ITEMS =
-            DeferredRegister.createItems(RealisticLighting.MOD_ID);
+            DeferredRegister.createItems(CreateRealisticLighting.MOD_ID);
 
 private static Item.Properties properties(String name) {
     return new Item.Properties();

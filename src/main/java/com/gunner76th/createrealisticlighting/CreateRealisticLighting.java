@@ -12,12 +12,12 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 
-@Mod(RealisticLighting.MOD_ID)
-public final class RealisticLighting {
+@Mod(CreateRealisticLighting.MOD_ID)
+public final class CreateRealisticLighting {
 
   public static final String MOD_ID = "create_realistic_lighting";
 
-  public RealisticLighting(IEventBus modEventBus, ModContainer modContainer) {
+  public CreateRealisticLighting(IEventBus modEventBus, ModContainer modContainer) {
     ModBlocks.BLOCKS.register(modEventBus);
     ModItems.ITEMS.register(modEventBus);
     ModBlockEntities.BLOCK_ENTITIES.register(modEventBus);

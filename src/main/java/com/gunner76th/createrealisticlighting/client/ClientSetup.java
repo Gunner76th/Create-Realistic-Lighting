@@ -1,6 +1,6 @@
 package com.gunner76th.createrealisticlighting.client;
 
-import com.gunner76th.createrealisticlighting.RealisticLighting;
+import com.gunner76th.createrealisticlighting.CreateRealisticLighting;
 import com.gunner76th.createrealisticlighting.block.IndustrialFixtureBlock;
 import com.gunner76th.createrealisticlighting.registry.ModItems;
 import com.gunner76th.createrealisticlighting.registry.ModMenus;
@@ -18,7 +18,7 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 
 @EventBusSubscriber(
-        modid = RealisticLighting.MOD_ID,
+        modid = CreateRealisticLighting.MOD_ID,
         bus = EventBusSubscriber.Bus.MOD,
         value = Dist.CLIENT
 )
@@ -36,7 +36,7 @@ public final class ClientSetup {
         event.enqueueWork(() -> {
             ResourceLocation colorProperty =
                     ResourceLocation.fromNamespaceAndPath(
-                            RealisticLighting.MOD_ID,
+                            CreateRealisticLighting.MOD_ID,
                             "fixture_color"
                     );
 

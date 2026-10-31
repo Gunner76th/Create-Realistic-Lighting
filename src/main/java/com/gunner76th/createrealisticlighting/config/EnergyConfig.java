@@ -1,7 +1,7 @@
 
 package com.gunner76th.createrealisticlighting.config;
 
-import com.gunner76th.createrealisticlighting.RealisticLighting;
+import com.gunner76th.createrealisticlighting.CreateRealisticLighting;
 
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -13,7 +13,7 @@ import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
  * Configuration changes are not applied during gameplay.
  */
 @EventBusSubscriber(
-        modid = RealisticLighting.MOD_ID
+        modid = CreateRealisticLighting.MOD_ID
 )
 public final class EnergyConfig {
 

@@ -1,7 +1,7 @@
 
 package com.gunner76th.createrealisticlighting.registry;
 
-import com.gunner76th.createrealisticlighting.RealisticLighting;
+import com.gunner76th.createrealisticlighting.CreateRealisticLighting;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -17,7 +17,7 @@ public final class ModCreativeTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS =
             DeferredRegister.create(
                     Registries.CREATIVE_MODE_TAB,
-                    RealisticLighting.MOD_ID
+                    CreateRealisticLighting.MOD_ID
             );
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> REALISTIC_LIGHTING =
