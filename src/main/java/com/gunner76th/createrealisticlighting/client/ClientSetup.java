@@ -30,6 +30,7 @@ public final class ClientSetup {
     public static void registerFlickerModels(ModelEvent.RegisterAdditional event) {
         String[] models = {
             "industrial_fixture_gray_3_flicker_base",
+            "industrial_fixture_red_3_flicker_base",
             "industrial_fixture_gray_3_flicker_bulb_lit",
             "industrial_fixture_gray_3_flicker_bulb_off"
         };

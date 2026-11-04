@@ -16,7 +16,6 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.state.BlockState;
 
 public final class LampFlickerRenderer implements BlockEntityRenderer<LampBaseBlockEntity> {
@@ -91,10 +90,11 @@ public final class LampFlickerRenderer implements BlockEntityRenderer<LampBaseBl
   public void render(LampBaseBlockEntity lamp, float partialTick, PoseStack poseStack,
       MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
     BlockState state = lamp.getBlockState();
-    // Scope this test to the gray industrial LED in its electrically lit state.
+    // Scope this test to gray and red industrial LEDs in their electrically lit state.
     if (!(state.getBlock() instanceof IndustrialFixtureBlock)
         || state.getValue(IndustrialFixtureBlock.BULB_KIND) != 3
-        || state.getValue(IndustrialFixtureBlock.COLOR) != DyeColor.GRAY
+        || (state.getValue(IndustrialFixtureBlock.COLOR) != net.minecraft.world.item.DyeColor.GRAY
+            && state.getValue(IndustrialFixtureBlock.COLOR) != net.minecraft.world.item.DyeColor.RED)
         || !state.getValue(LampBaseBlock.LIT)) {
       return;
     }
