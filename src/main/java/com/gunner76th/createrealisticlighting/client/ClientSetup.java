@@ -48,6 +48,22 @@ public final class ClientSetup {
             "industrial_fixture_gray_3_flicker_bulb_lit",
             "industrial_fixture_gray_3_flicker_bulb_off",
             "square_ceiling_fixture_gray_3_flicker_base",
+            "square_ceiling_fixture_white_3_flicker_base",
+            "square_ceiling_fixture_orange_3_flicker_base",
+            "square_ceiling_fixture_magenta_3_flicker_base",
+            "square_ceiling_fixture_light_blue_3_flicker_base",
+            "square_ceiling_fixture_yellow_3_flicker_base",
+            "square_ceiling_fixture_lime_3_flicker_base",
+            "square_ceiling_fixture_pink_3_flicker_base",
+            "square_ceiling_fixture_light_gray_3_flicker_base",
+            "square_ceiling_fixture_cyan_3_flicker_base",
+            "square_ceiling_fixture_purple_3_flicker_base",
+            "square_ceiling_fixture_blue_3_flicker_base",
+            "square_ceiling_fixture_brown_3_flicker_base",
+            "square_ceiling_fixture_green_3_flicker_base",
+            "square_ceiling_fixture_red_3_flicker_base",
+            "square_ceiling_fixture_black_3_flicker_base",
+
             "square_ceiling_fixture_gray_3_flicker_diffuser_lit",
             "square_ceiling_fixture_gray_3_flicker_diffuser_off"
         };

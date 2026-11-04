@@ -101,11 +101,10 @@ public final class LampFlickerRenderer implements BlockEntityRenderer<LampBaseBl
     BlockState state = lamp.getBlockState();
     boolean industrial = state.getBlock() instanceof IndustrialFixtureBlock;
     boolean ceiling = state.getBlock() instanceof SquareCeilingFixtureBlock;
-    // First ceiling prototype: gray LED only. Industrial fixtures remain all colors.
+    // All ceiling and industrial fixture colors share their respective flicker models.
     if ((!industrial && !ceiling)
         || state.getValue(IndustrialFixtureBlock.BULB_KIND) != 3
-        || !state.getValue(LampBaseBlock.LIT)
-        || (ceiling && state.getValue(IndustrialFixtureBlock.COLOR) != net.minecraft.world.item.DyeColor.GRAY)) {
+        || !state.getValue(LampBaseBlock.LIT)) {
       return;
     }
 
