@@ -90,11 +90,9 @@ public final class LampFlickerRenderer implements BlockEntityRenderer<LampBaseBl
   public void render(LampBaseBlockEntity lamp, float partialTick, PoseStack poseStack,
       MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
     BlockState state = lamp.getBlockState();
-    // Scope this test to gray and red industrial LEDs in their electrically lit state.
+    // Support every industrial fixture color, but only electrically lit LED bulbs.
     if (!(state.getBlock() instanceof IndustrialFixtureBlock)
         || state.getValue(IndustrialFixtureBlock.BULB_KIND) != 3
-        || (state.getValue(IndustrialFixtureBlock.COLOR) != net.minecraft.world.item.DyeColor.GRAY
-            && state.getValue(IndustrialFixtureBlock.COLOR) != net.minecraft.world.item.DyeColor.RED)
         || !state.getValue(LampBaseBlock.LIT)) {
       return;
     }
