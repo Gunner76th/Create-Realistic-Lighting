@@ -2,6 +2,7 @@ package com.gunner76th.createrealisticlighting.client.render;
 
 import com.gunner76th.createrealisticlighting.block.IndustrialFixtureBlock;
 import com.gunner76th.createrealisticlighting.block.LampBaseBlock;
+import com.gunner76th.createrealisticlighting.block.SquareCeilingFixtureBlock;
 import com.gunner76th.createrealisticlighting.blockentity.LampBaseBlockEntity;
 import com.gunner76th.createrealisticlighting.config.ClientConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -26,6 +27,14 @@ public final class LampFlickerRenderer implements BlockEntityRenderer<LampBaseBl
   private static final ModelResourceLocation LED_OFF_MODEL = ModelResourceLocation.standalone(
       ResourceLocation.fromNamespaceAndPath("create_realistic_lighting",
           "block/industrial_fixture_gray_3_flicker_bulb_off"));
+
+  private static final ModelResourceLocation CEILING_LIT_MODEL = ModelResourceLocation.standalone(
+      ResourceLocation.fromNamespaceAndPath("create_realistic_lighting",
+          "block/square_ceiling_fixture_gray_3_flicker_diffuser_lit"));
+
+  private static final ModelResourceLocation CEILING_OFF_MODEL = ModelResourceLocation.standalone(
+      ResourceLocation.fromNamespaceAndPath("create_realistic_lighting",
+          "block/square_ceiling_fixture_gray_3_flicker_diffuser_off"));
 
   private final BlockRenderDispatcher blockRenderer;
 
@@ -90,32 +99,58 @@ public final class LampFlickerRenderer implements BlockEntityRenderer<LampBaseBl
   public void render(LampBaseBlockEntity lamp, float partialTick, PoseStack poseStack,
       MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
     BlockState state = lamp.getBlockState();
-    // Support every industrial fixture color, but only electrically lit LED bulbs.
-    if (!(state.getBlock() instanceof IndustrialFixtureBlock)
+    boolean industrial = state.getBlock() instanceof IndustrialFixtureBlock;
+    boolean ceiling = state.getBlock() instanceof SquareCeilingFixtureBlock;
+    // First ceiling prototype: gray LED only. Industrial fixtures remain all colors.
+    if ((!industrial && !ceiling)
         || state.getValue(IndustrialFixtureBlock.BULB_KIND) != 3
-        || !state.getValue(LampBaseBlock.LIT)) {
+        || !state.getValue(LampBaseBlock.LIT)
+        || (ceiling && state.getValue(IndustrialFixtureBlock.COLOR) != net.minecraft.world.item.DyeColor.GRAY)) {
       return;
     }
 
-    ModelResourceLocation modelId = showLitBulb(lamp, partialTick)
-        ? LED_LIT_MODEL : LED_OFF_MODEL;
+    boolean lit = showLitBulb(lamp, partialTick);
+    ModelResourceLocation modelId = ceiling
+        ? (lit ? CEILING_LIT_MODEL : CEILING_OFF_MODEL)
+        : (lit ? LED_LIT_MODEL : LED_OFF_MODEL);
     BakedModel bulb = Minecraft.getInstance().getModelManager().getModel(modelId);
     VertexConsumer vertices = bufferSource.getBuffer(RenderType.cutout());
 
     poseStack.pushPose();
     poseStack.translate(0.5, 0.5, 0.5);
-    switch (state.getValue(IndustrialFixtureBlock.FACING)) {
-      case UP -> { }
-      case DOWN -> poseStack.mulPose(Axis.XP.rotationDegrees(180));
-      case NORTH -> poseStack.mulPose(Axis.XP.rotationDegrees(90));
-      case SOUTH -> poseStack.mulPose(Axis.XP.rotationDegrees(270));
-      case EAST -> {
-        poseStack.mulPose(Axis.YP.rotationDegrees(90));
-        poseStack.mulPose(Axis.XP.rotationDegrees(90));
+    if (ceiling) {
+      // Match square_ceiling_fixture.json: x/y rotations for all six faces.
+      switch (state.getValue(IndustrialFixtureBlock.FACING)) {
+        case UP -> { }
+        case DOWN -> poseStack.mulPose(Axis.XP.rotationDegrees(180));
+        case NORTH -> poseStack.mulPose(Axis.XP.rotationDegrees(90));
+        case SOUTH -> {
+          poseStack.mulPose(Axis.YP.rotationDegrees(180));
+          poseStack.mulPose(Axis.XP.rotationDegrees(90));
+        }
+        case EAST -> {
+          poseStack.mulPose(Axis.YP.rotationDegrees(90));
+          poseStack.mulPose(Axis.XP.rotationDegrees(90));
+        }
+        case WEST -> {
+          poseStack.mulPose(Axis.YP.rotationDegrees(270));
+          poseStack.mulPose(Axis.XP.rotationDegrees(90));
+        }
       }
-      case WEST -> {
-        poseStack.mulPose(Axis.YP.rotationDegrees(270));
-        poseStack.mulPose(Axis.XP.rotationDegrees(90));
+    } else {
+      switch (state.getValue(IndustrialFixtureBlock.FACING)) {
+        case UP -> { }
+        case DOWN -> poseStack.mulPose(Axis.XP.rotationDegrees(180));
+        case NORTH -> poseStack.mulPose(Axis.XP.rotationDegrees(90));
+        case SOUTH -> poseStack.mulPose(Axis.XP.rotationDegrees(270));
+        case EAST -> {
+          poseStack.mulPose(Axis.YP.rotationDegrees(90));
+          poseStack.mulPose(Axis.XP.rotationDegrees(90));
+        }
+        case WEST -> {
+          poseStack.mulPose(Axis.YP.rotationDegrees(270));
+          poseStack.mulPose(Axis.XP.rotationDegrees(90));
+        }
       }
     }
     poseStack.translate(-0.5, -0.5, -0.5);

@@ -46,7 +46,10 @@ public final class ClientSetup {
             "industrial_fixture_green_3_flicker_base",
             "industrial_fixture_black_3_flicker_base",
             "industrial_fixture_gray_3_flicker_bulb_lit",
-            "industrial_fixture_gray_3_flicker_bulb_off"
+            "industrial_fixture_gray_3_flicker_bulb_off",
+            "square_ceiling_fixture_gray_3_flicker_base",
+            "square_ceiling_fixture_gray_3_flicker_diffuser_lit",
+            "square_ceiling_fixture_gray_3_flicker_diffuser_off"
         };
 
         for (String model : models) {
