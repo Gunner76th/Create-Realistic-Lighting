@@ -65,7 +65,10 @@ public final class ClientSetup {
             "square_ceiling_fixture_black_3_flicker_base",
 
             "square_ceiling_fixture_gray_3_flicker_diffuser_lit",
-            "square_ceiling_fixture_gray_3_flicker_diffuser_off"
+            "square_ceiling_fixture_gray_3_flicker_diffuser_off",
+            "wall_sconce_gray_3_flicker_base",
+            "wall_sconce_gray_3_flicker_bulb_lit",
+            "wall_sconce_gray_3_flicker_bulb_off"
         };
 
         for (String model : models) {

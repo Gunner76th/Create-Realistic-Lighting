@@ -3,6 +3,7 @@ package com.gunner76th.createrealisticlighting.client.render;
 import com.gunner76th.createrealisticlighting.block.IndustrialFixtureBlock;
 import com.gunner76th.createrealisticlighting.block.LampBaseBlock;
 import com.gunner76th.createrealisticlighting.block.SquareCeilingFixtureBlock;
+import com.gunner76th.createrealisticlighting.block.WallSconceBlock;
 import com.gunner76th.createrealisticlighting.blockentity.LampBaseBlockEntity;
 import com.gunner76th.createrealisticlighting.config.ClientConfig;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -35,6 +36,14 @@ public final class LampFlickerRenderer implements BlockEntityRenderer<LampBaseBl
   private static final ModelResourceLocation CEILING_OFF_MODEL = ModelResourceLocation.standalone(
       ResourceLocation.fromNamespaceAndPath("create_realistic_lighting",
           "block/square_ceiling_fixture_gray_3_flicker_diffuser_off"));
+
+  private static final ModelResourceLocation SCONCE_LIT_MODEL = ModelResourceLocation.standalone(
+      ResourceLocation.fromNamespaceAndPath("create_realistic_lighting",
+          "block/wall_sconce_gray_3_flicker_bulb_lit"));
+
+  private static final ModelResourceLocation SCONCE_OFF_MODEL = ModelResourceLocation.standalone(
+      ResourceLocation.fromNamespaceAndPath("create_realistic_lighting",
+          "block/wall_sconce_gray_3_flicker_bulb_off"));
 
   private final BlockRenderDispatcher blockRenderer;
 
@@ -99,25 +108,37 @@ public final class LampFlickerRenderer implements BlockEntityRenderer<LampBaseBl
   public void render(LampBaseBlockEntity lamp, float partialTick, PoseStack poseStack,
       MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
     BlockState state = lamp.getBlockState();
+    boolean sconce = state.getBlock() instanceof WallSconceBlock;
     boolean industrial = state.getBlock() instanceof IndustrialFixtureBlock;
     boolean ceiling = state.getBlock() instanceof SquareCeilingFixtureBlock;
-    // All ceiling and industrial fixture colors share their respective flicker models.
+    // The first wall sconce prototype is gray only; industrial and ceiling support all colors.
     if ((!industrial && !ceiling)
+        || (sconce && state.getValue(IndustrialFixtureBlock.COLOR) != net.minecraft.world.item.DyeColor.GRAY)
         || state.getValue(IndustrialFixtureBlock.BULB_KIND) != 3
         || !state.getValue(LampBaseBlock.LIT)) {
       return;
     }
 
     boolean lit = showLitBulb(lamp, partialTick);
-    ModelResourceLocation modelId = ceiling
-        ? (lit ? CEILING_LIT_MODEL : CEILING_OFF_MODEL)
+    ModelResourceLocation modelId = sconce
+        ? (lit ? SCONCE_LIT_MODEL : SCONCE_OFF_MODEL)
+        : ceiling ? (lit ? CEILING_LIT_MODEL : CEILING_OFF_MODEL)
         : (lit ? LED_LIT_MODEL : LED_OFF_MODEL);
     BakedModel bulb = Minecraft.getInstance().getModelManager().getModel(modelId);
     VertexConsumer vertices = bufferSource.getBuffer(RenderType.cutout());
 
     poseStack.pushPose();
     poseStack.translate(0.5, 0.5, 0.5);
-    if (ceiling) {
+    if (sconce) {
+      // The wall sconce base model faces SOUTH. Match wall_sconce.json Y rotations.
+      switch (state.getValue(IndustrialFixtureBlock.FACING)) {
+        case SOUTH -> { }
+        case WEST -> poseStack.mulPose(Axis.YP.rotationDegrees(90));
+        case NORTH -> poseStack.mulPose(Axis.YP.rotationDegrees(180));
+        case EAST -> poseStack.mulPose(Axis.YP.rotationDegrees(270));
+        default -> { }
+      }
+    } else if (ceiling) {
       // Match square_ceiling_fixture.json: x/y rotations for all six faces.
       switch (state.getValue(IndustrialFixtureBlock.FACING)) {
         case UP -> { }
