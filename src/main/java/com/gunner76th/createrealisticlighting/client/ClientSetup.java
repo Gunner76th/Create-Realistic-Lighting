@@ -67,6 +67,22 @@ public final class ClientSetup {
             "square_ceiling_fixture_gray_3_flicker_diffuser_lit",
             "square_ceiling_fixture_gray_3_flicker_diffuser_off",
             "wall_sconce_gray_3_flicker_base",
+            "wall_sconce_white_3_flicker_base",
+            "wall_sconce_orange_3_flicker_base",
+            "wall_sconce_magenta_3_flicker_base",
+            "wall_sconce_light_blue_3_flicker_base",
+            "wall_sconce_yellow_3_flicker_base",
+            "wall_sconce_lime_3_flicker_base",
+            "wall_sconce_pink_3_flicker_base",
+            "wall_sconce_light_gray_3_flicker_base",
+            "wall_sconce_cyan_3_flicker_base",
+            "wall_sconce_purple_3_flicker_base",
+            "wall_sconce_blue_3_flicker_base",
+            "wall_sconce_brown_3_flicker_base",
+            "wall_sconce_green_3_flicker_base",
+            "wall_sconce_red_3_flicker_base",
+            "wall_sconce_black_3_flicker_base",
+
             "wall_sconce_gray_3_flicker_bulb_lit",
             "wall_sconce_gray_3_flicker_bulb_off"
         };

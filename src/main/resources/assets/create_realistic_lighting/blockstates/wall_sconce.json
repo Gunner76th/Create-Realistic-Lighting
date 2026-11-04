@@ -113,19 +113,19 @@
       "y": 270
     },
     "facing=south,bulb_kind=3,color=white,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_white_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_white_3_flicker_base",
       "y": 0
     },
     "facing=west,bulb_kind=3,color=white,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_white_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_white_3_flicker_base",
       "y": 90
     },
     "facing=north,bulb_kind=3,color=white,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_white_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_white_3_flicker_base",
       "y": 180
     },
     "facing=east,bulb_kind=3,color=white,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_white_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_white_3_flicker_base",
       "y": 270
     },
     "facing=south,bulb_kind=0,color=orange,lit=false": {
@@ -241,19 +241,19 @@
       "y": 270
     },
     "facing=south,bulb_kind=3,color=orange,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_orange_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_orange_3_flicker_base",
       "y": 0
     },
     "facing=west,bulb_kind=3,color=orange,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_orange_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_orange_3_flicker_base",
       "y": 90
     },
     "facing=north,bulb_kind=3,color=orange,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_orange_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_orange_3_flicker_base",
       "y": 180
     },
     "facing=east,bulb_kind=3,color=orange,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_orange_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_orange_3_flicker_base",
       "y": 270
     },
     "facing=south,bulb_kind=0,color=magenta,lit=false": {
@@ -369,19 +369,19 @@
       "y": 270
     },
     "facing=south,bulb_kind=3,color=magenta,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_magenta_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_magenta_3_flicker_base",
       "y": 0
     },
     "facing=west,bulb_kind=3,color=magenta,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_magenta_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_magenta_3_flicker_base",
       "y": 90
     },
     "facing=north,bulb_kind=3,color=magenta,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_magenta_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_magenta_3_flicker_base",
       "y": 180
     },
     "facing=east,bulb_kind=3,color=magenta,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_magenta_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_magenta_3_flicker_base",
       "y": 270
     },
     "facing=south,bulb_kind=0,color=light_blue,lit=false": {
@@ -497,19 +497,19 @@
       "y": 270
     },
     "facing=south,bulb_kind=3,color=light_blue,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_light_blue_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_light_blue_3_flicker_base",
       "y": 0
     },
     "facing=west,bulb_kind=3,color=light_blue,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_light_blue_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_light_blue_3_flicker_base",
       "y": 90
     },
     "facing=north,bulb_kind=3,color=light_blue,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_light_blue_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_light_blue_3_flicker_base",
       "y": 180
     },
     "facing=east,bulb_kind=3,color=light_blue,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_light_blue_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_light_blue_3_flicker_base",
       "y": 270
     },
     "facing=south,bulb_kind=0,color=yellow,lit=false": {
@@ -625,19 +625,19 @@
       "y": 270
     },
     "facing=south,bulb_kind=3,color=yellow,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_yellow_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_yellow_3_flicker_base",
       "y": 0
     },
     "facing=west,bulb_kind=3,color=yellow,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_yellow_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_yellow_3_flicker_base",
       "y": 90
     },
     "facing=north,bulb_kind=3,color=yellow,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_yellow_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_yellow_3_flicker_base",
       "y": 180
     },
     "facing=east,bulb_kind=3,color=yellow,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_yellow_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_yellow_3_flicker_base",
       "y": 270
     },
     "facing=south,bulb_kind=0,color=lime,lit=false": {
@@ -753,19 +753,19 @@
       "y": 270
     },
     "facing=south,bulb_kind=3,color=lime,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_lime_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_lime_3_flicker_base",
       "y": 0
     },
     "facing=west,bulb_kind=3,color=lime,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_lime_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_lime_3_flicker_base",
       "y": 90
     },
     "facing=north,bulb_kind=3,color=lime,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_lime_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_lime_3_flicker_base",
       "y": 180
     },
     "facing=east,bulb_kind=3,color=lime,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_lime_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_lime_3_flicker_base",
       "y": 270
     },
     "facing=south,bulb_kind=0,color=pink,lit=false": {
@@ -881,19 +881,19 @@
       "y": 270
     },
     "facing=south,bulb_kind=3,color=pink,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_pink_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_pink_3_flicker_base",
       "y": 0
     },
     "facing=west,bulb_kind=3,color=pink,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_pink_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_pink_3_flicker_base",
       "y": 90
     },
     "facing=north,bulb_kind=3,color=pink,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_pink_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_pink_3_flicker_base",
       "y": 180
     },
     "facing=east,bulb_kind=3,color=pink,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_pink_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_pink_3_flicker_base",
       "y": 270
     },
     "facing=south,bulb_kind=0,color=gray,lit=false": {
@@ -1137,19 +1137,19 @@
       "y": 270
     },
     "facing=south,bulb_kind=3,color=light_gray,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_light_gray_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_light_gray_3_flicker_base",
       "y": 0
     },
     "facing=west,bulb_kind=3,color=light_gray,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_light_gray_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_light_gray_3_flicker_base",
       "y": 90
     },
     "facing=north,bulb_kind=3,color=light_gray,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_light_gray_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_light_gray_3_flicker_base",
       "y": 180
     },
     "facing=east,bulb_kind=3,color=light_gray,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_light_gray_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_light_gray_3_flicker_base",
       "y": 270
     },
     "facing=south,bulb_kind=0,color=cyan,lit=false": {
@@ -1265,19 +1265,19 @@
       "y": 270
     },
     "facing=south,bulb_kind=3,color=cyan,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_cyan_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_cyan_3_flicker_base",
       "y": 0
     },
     "facing=west,bulb_kind=3,color=cyan,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_cyan_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_cyan_3_flicker_base",
       "y": 90
     },
     "facing=north,bulb_kind=3,color=cyan,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_cyan_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_cyan_3_flicker_base",
       "y": 180
     },
     "facing=east,bulb_kind=3,color=cyan,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_cyan_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_cyan_3_flicker_base",
       "y": 270
     },
     "facing=south,bulb_kind=0,color=purple,lit=false": {
@@ -1393,19 +1393,19 @@
       "y": 270
     },
     "facing=south,bulb_kind=3,color=purple,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_purple_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_purple_3_flicker_base",
       "y": 0
     },
     "facing=west,bulb_kind=3,color=purple,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_purple_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_purple_3_flicker_base",
       "y": 90
     },
     "facing=north,bulb_kind=3,color=purple,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_purple_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_purple_3_flicker_base",
       "y": 180
     },
     "facing=east,bulb_kind=3,color=purple,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_purple_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_purple_3_flicker_base",
       "y": 270
     },
     "facing=south,bulb_kind=0,color=blue,lit=false": {
@@ -1521,19 +1521,19 @@
       "y": 270
     },
     "facing=south,bulb_kind=3,color=blue,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_blue_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_blue_3_flicker_base",
       "y": 0
     },
     "facing=west,bulb_kind=3,color=blue,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_blue_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_blue_3_flicker_base",
       "y": 90
     },
     "facing=north,bulb_kind=3,color=blue,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_blue_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_blue_3_flicker_base",
       "y": 180
     },
     "facing=east,bulb_kind=3,color=blue,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_blue_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_blue_3_flicker_base",
       "y": 270
     },
     "facing=south,bulb_kind=0,color=brown,lit=false": {
@@ -1649,19 +1649,19 @@
       "y": 270
     },
     "facing=south,bulb_kind=3,color=brown,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_brown_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_brown_3_flicker_base",
       "y": 0
     },
     "facing=west,bulb_kind=3,color=brown,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_brown_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_brown_3_flicker_base",
       "y": 90
     },
     "facing=north,bulb_kind=3,color=brown,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_brown_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_brown_3_flicker_base",
       "y": 180
     },
     "facing=east,bulb_kind=3,color=brown,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_brown_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_brown_3_flicker_base",
       "y": 270
     },
     "facing=south,bulb_kind=0,color=green,lit=false": {
@@ -1777,19 +1777,19 @@
       "y": 270
     },
     "facing=south,bulb_kind=3,color=green,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_green_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_green_3_flicker_base",
       "y": 0
     },
     "facing=west,bulb_kind=3,color=green,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_green_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_green_3_flicker_base",
       "y": 90
     },
     "facing=north,bulb_kind=3,color=green,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_green_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_green_3_flicker_base",
       "y": 180
     },
     "facing=east,bulb_kind=3,color=green,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_green_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_green_3_flicker_base",
       "y": 270
     },
     "facing=south,bulb_kind=0,color=red,lit=false": {
@@ -1905,19 +1905,19 @@
       "y": 270
     },
     "facing=south,bulb_kind=3,color=red,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_red_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_red_3_flicker_base",
       "y": 0
     },
     "facing=west,bulb_kind=3,color=red,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_red_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_red_3_flicker_base",
       "y": 90
     },
     "facing=north,bulb_kind=3,color=red,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_red_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_red_3_flicker_base",
       "y": 180
     },
     "facing=east,bulb_kind=3,color=red,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_red_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_red_3_flicker_base",
       "y": 270
     },
     "facing=south,bulb_kind=0,color=black,lit=false": {
@@ -2033,19 +2033,19 @@
       "y": 270
     },
     "facing=south,bulb_kind=3,color=black,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_black_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_black_3_flicker_base",
       "y": 0
     },
     "facing=west,bulb_kind=3,color=black,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_black_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_black_3_flicker_base",
       "y": 90
     },
     "facing=north,bulb_kind=3,color=black,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_black_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_black_3_flicker_base",
       "y": 180
     },
     "facing=east,bulb_kind=3,color=black,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_black_3_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_black_3_flicker_base",
       "y": 270
     },
     "facing=south,bulb_kind=4,color=white,lit=false": {
