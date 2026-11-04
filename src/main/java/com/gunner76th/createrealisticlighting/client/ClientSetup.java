@@ -1,5 +1,8 @@
 package com.gunner76th.createrealisticlighting.client;
 
+
+import net.neoforged.neoforge.client.event.ModelEvent;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import com.gunner76th.createrealisticlighting.CreateRealisticLighting;
 import com.gunner76th.createrealisticlighting.block.IndustrialFixtureBlock;
 import com.gunner76th.createrealisticlighting.client.render.LampFlickerRenderer;
@@ -23,6 +26,24 @@ import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
     bus = EventBusSubscriber.Bus.MOD,
     value = Dist.CLIENT)
 public final class ClientSetup {
+    @SubscribeEvent
+    public static void registerFlickerModels(ModelEvent.RegisterAdditional event) {
+        String[] models = {
+            "industrial_fixture_gray_3_flicker_base",
+            "industrial_fixture_gray_3_flicker_bulb_lit",
+            "industrial_fixture_gray_3_flicker_bulb_off"
+        };
+
+        for (String model : models) {
+            ResourceLocation id = ResourceLocation.fromNamespaceAndPath(
+                "create_realistic_lighting",
+                "block/" + model
+            );
+
+            event.register(ModelResourceLocation.standalone(id));
+        }
+    }
+
 
   private ClientSetup() {}
 
