@@ -140,13 +140,9 @@ public final class LampFlickerRenderer implements BlockEntityRenderer<LampBaseBl
     int bulbKind = state.getValue(IndustrialFixtureBlock.BULB_KIND);
 
     // LED flickering works on all fixture types and colors.
-    // Fluorescent flickering is currently limited to the gray industrial prototype.
+    // Fluorescent flickering works on all industrial fixture colors.
     boolean led = bulbKind == 3;
-    boolean fluorescent =
-        bulbKind == 2
-            && industrial
-            && state.getValue(IndustrialFixtureBlock.COLOR)
-                == net.minecraft.world.item.DyeColor.GRAY;
+    boolean fluorescent = bulbKind == 2 && industrial;
 
     if ((!industrial && !ceiling && !sconce)
         || (!led && !fluorescent)
@@ -157,7 +153,13 @@ public final class LampFlickerRenderer implements BlockEntityRenderer<LampBaseBl
 
     ModelResourceLocation modelId;
     if (fluorescent) {
-      modelId = lit ? FLUORESCENT_LIT_MODEL : FLUORESCENT_OFF_MODEL;
+      String color = state.getValue(IndustrialFixtureBlock.COLOR).getName();
+      String part = lit ? "bulb_lit" : "bulb_off";
+      modelId =
+          ModelResourceLocation.standalone(
+              ResourceLocation.fromNamespaceAndPath(
+                  "create_realistic_lighting",
+                  "block/industrial_fixture_" + color + "_2_flicker_" + part));
     } else if (sconce) {
       modelId = lit ? SCONCE_LIT_MODEL : SCONCE_OFF_MODEL;
     } else if (ceiling) {

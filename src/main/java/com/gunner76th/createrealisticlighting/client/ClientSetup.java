@@ -87,6 +87,23 @@ public final class ClientSetup {
       "wall_sconce_gray_3_flicker_bulb_off"
     };
 
+    String[] fluorescentColors = {
+      "white", "orange", "magenta", "light_blue",
+      "yellow", "lime", "pink", "light_gray",
+      "cyan", "purple", "blue", "brown",
+      "green", "red", "black"
+    };
+
+    for (String color : fluorescentColors) {
+      for (String part : new String[] {"base", "bulb_lit", "bulb_off"}) {
+        ResourceLocation id =
+            ResourceLocation.fromNamespaceAndPath(
+                "create_realistic_lighting",
+                "block/industrial_fixture_" + color + "_2_flicker_" + part);
+
+        event.register(ModelResourceLocation.standalone(id));
+      }
+    }
     for (String model : models) {
       ResourceLocation id =
           ResourceLocation.fromNamespaceAndPath("create_realistic_lighting", "block/" + model);
@@ -135,3 +152,4 @@ public final class ClientSetup {
         });
   }
 }
+
