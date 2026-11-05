@@ -143,9 +143,10 @@ public final class LampFlickerRenderer implements BlockEntityRenderer<LampBaseBl
     // Fluorescent flickering works on all industrial fixture colors.
     boolean led = bulbKind == 3;
     boolean fluorescent = bulbKind == 2 && (industrial || ceiling || sconce);
+    boolean grow = bulbKind == 4 && (industrial || ceiling || sconce);
 
     if ((!industrial && !ceiling && !sconce)
-        || (!led && !fluorescent)
+        || (!led && !fluorescent && !grow)
         || !state.getValue(LampBaseBlock.LIT)) {
       return;
     }
@@ -160,6 +161,30 @@ public final class LampFlickerRenderer implements BlockEntityRenderer<LampBaseBl
               ResourceLocation.fromNamespaceAndPath(
                   "create_realistic_lighting",
                   "block/square_ceiling_fixture_" + color + "_2_flicker_" + part));
+    } else if (grow && ceiling) {
+      String color = state.getValue(IndustrialFixtureBlock.COLOR).getName();
+      String part = lit ? "diffuser_lit" : "diffuser_off";
+      modelId =
+          ModelResourceLocation.standalone(
+              ResourceLocation.fromNamespaceAndPath(
+                  "create_realistic_lighting",
+                  "block/square_ceiling_fixture_" + color + "_4_flicker_" + part));
+    } else if (grow && industrial && !sconce) {
+      String color = state.getValue(IndustrialFixtureBlock.COLOR).getName();
+      String part = lit ? "bulb_lit" : "bulb_off";
+      modelId =
+          ModelResourceLocation.standalone(
+              ResourceLocation.fromNamespaceAndPath(
+                  "create_realistic_lighting",
+                  "block/industrial_fixture_" + color + "_4_flicker_" + part));
+    } else if (grow && sconce) {
+      String color = state.getValue(IndustrialFixtureBlock.COLOR).getName();
+      String part = lit ? "bulb_lit" : "bulb_off";
+      modelId =
+          ModelResourceLocation.standalone(
+              ResourceLocation.fromNamespaceAndPath(
+                  "create_realistic_lighting",
+                  "block/wall_sconce_" + color + "_4_flicker_" + part));
     } else if (fluorescent && sconce) {
       String color = state.getValue(IndustrialFixtureBlock.COLOR).getName();
       String part = lit ? "bulb_lit" : "bulb_off";
@@ -184,6 +209,7 @@ public final class LampFlickerRenderer implements BlockEntityRenderer<LampBaseBl
       modelId = lit ? LED_LIT_MODEL : LED_OFF_MODEL;
     }
     BakedModel bulb = Minecraft.getInstance().getModelManager().getModel(modelId);
+
     VertexConsumer vertices = bufferSource.getBuffer(RenderType.cutout());
 
     poseStack.pushPose();

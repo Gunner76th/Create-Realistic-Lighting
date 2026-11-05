@@ -3846,7 +3846,7 @@
       "y": 0
     },
     "facing=up,bulb_kind=4,color=white,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_white_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_white_4_flicker_base",
       "x": 0,
       "y": 0
     },
@@ -3856,7 +3856,7 @@
       "y": 0
     },
     "facing=up,bulb_kind=4,color=orange,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_orange_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_orange_4_flicker_base",
       "x": 0,
       "y": 0
     },
@@ -3866,7 +3866,7 @@
       "y": 0
     },
     "facing=up,bulb_kind=4,color=magenta,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_magenta_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_magenta_4_flicker_base",
       "x": 0,
       "y": 0
     },
@@ -3876,7 +3876,7 @@
       "y": 0
     },
     "facing=up,bulb_kind=4,color=light_blue,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_light_blue_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_light_blue_4_flicker_base",
       "x": 0,
       "y": 0
     },
@@ -3886,7 +3886,7 @@
       "y": 0
     },
     "facing=up,bulb_kind=4,color=yellow,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_yellow_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_yellow_4_flicker_base",
       "x": 0,
       "y": 0
     },
@@ -3896,7 +3896,7 @@
       "y": 0
     },
     "facing=up,bulb_kind=4,color=lime,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_lime_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_lime_4_flicker_base",
       "x": 0,
       "y": 0
     },
@@ -3906,7 +3906,7 @@
       "y": 0
     },
     "facing=up,bulb_kind=4,color=pink,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_pink_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_pink_4_flicker_base",
       "x": 0,
       "y": 0
     },
@@ -3916,7 +3916,7 @@
       "y": 0
     },
     "facing=up,bulb_kind=4,color=gray,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_gray_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_gray_4_flicker_base",
       "x": 0,
       "y": 0
     },
@@ -3926,7 +3926,7 @@
       "y": 0
     },
     "facing=up,bulb_kind=4,color=light_gray,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_light_gray_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_light_gray_4_flicker_base",
       "x": 0,
       "y": 0
     },
@@ -3936,7 +3936,7 @@
       "y": 0
     },
     "facing=up,bulb_kind=4,color=cyan,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_cyan_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_cyan_4_flicker_base",
       "x": 0,
       "y": 0
     },
@@ -3946,7 +3946,7 @@
       "y": 0
     },
     "facing=up,bulb_kind=4,color=purple,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_purple_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_purple_4_flicker_base",
       "x": 0,
       "y": 0
     },
@@ -3956,7 +3956,7 @@
       "y": 0
     },
     "facing=up,bulb_kind=4,color=blue,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_blue_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_blue_4_flicker_base",
       "x": 0,
       "y": 0
     },
@@ -3966,7 +3966,7 @@
       "y": 0
     },
     "facing=up,bulb_kind=4,color=brown,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_brown_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_brown_4_flicker_base",
       "x": 0,
       "y": 0
     },
@@ -3976,7 +3976,7 @@
       "y": 0
     },
     "facing=up,bulb_kind=4,color=green,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_green_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_green_4_flicker_base",
       "x": 0,
       "y": 0
     },
@@ -3986,7 +3986,7 @@
       "y": 0
     },
     "facing=up,bulb_kind=4,color=red,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_red_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_red_4_flicker_base",
       "x": 0,
       "y": 0
     },
@@ -3996,7 +3996,7 @@
       "y": 0
     },
     "facing=up,bulb_kind=4,color=black,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_black_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_black_4_flicker_base",
       "x": 0,
       "y": 0
     },
@@ -4006,7 +4006,7 @@
       "y": 0
     },
     "facing=down,bulb_kind=4,color=white,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_white_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_white_4_flicker_base",
       "x": 180,
       "y": 0
     },
@@ -4016,7 +4016,7 @@
       "y": 0
     },
     "facing=down,bulb_kind=4,color=orange,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_orange_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_orange_4_flicker_base",
       "x": 180,
       "y": 0
     },
@@ -4026,7 +4026,7 @@
       "y": 0
     },
     "facing=down,bulb_kind=4,color=magenta,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_magenta_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_magenta_4_flicker_base",
       "x": 180,
       "y": 0
     },
@@ -4036,7 +4036,7 @@
       "y": 0
     },
     "facing=down,bulb_kind=4,color=light_blue,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_light_blue_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_light_blue_4_flicker_base",
       "x": 180,
       "y": 0
     },
@@ -4046,7 +4046,7 @@
       "y": 0
     },
     "facing=down,bulb_kind=4,color=yellow,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_yellow_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_yellow_4_flicker_base",
       "x": 180,
       "y": 0
     },
@@ -4056,7 +4056,7 @@
       "y": 0
     },
     "facing=down,bulb_kind=4,color=lime,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_lime_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_lime_4_flicker_base",
       "x": 180,
       "y": 0
     },
@@ -4066,7 +4066,7 @@
       "y": 0
     },
     "facing=down,bulb_kind=4,color=pink,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_pink_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_pink_4_flicker_base",
       "x": 180,
       "y": 0
     },
@@ -4076,7 +4076,7 @@
       "y": 0
     },
     "facing=down,bulb_kind=4,color=gray,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_gray_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_gray_4_flicker_base",
       "x": 180,
       "y": 0
     },
@@ -4086,7 +4086,7 @@
       "y": 0
     },
     "facing=down,bulb_kind=4,color=light_gray,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_light_gray_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_light_gray_4_flicker_base",
       "x": 180,
       "y": 0
     },
@@ -4096,7 +4096,7 @@
       "y": 0
     },
     "facing=down,bulb_kind=4,color=cyan,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_cyan_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_cyan_4_flicker_base",
       "x": 180,
       "y": 0
     },
@@ -4106,7 +4106,7 @@
       "y": 0
     },
     "facing=down,bulb_kind=4,color=purple,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_purple_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_purple_4_flicker_base",
       "x": 180,
       "y": 0
     },
@@ -4116,7 +4116,7 @@
       "y": 0
     },
     "facing=down,bulb_kind=4,color=blue,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_blue_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_blue_4_flicker_base",
       "x": 180,
       "y": 0
     },
@@ -4126,7 +4126,7 @@
       "y": 0
     },
     "facing=down,bulb_kind=4,color=brown,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_brown_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_brown_4_flicker_base",
       "x": 180,
       "y": 0
     },
@@ -4136,7 +4136,7 @@
       "y": 0
     },
     "facing=down,bulb_kind=4,color=green,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_green_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_green_4_flicker_base",
       "x": 180,
       "y": 0
     },
@@ -4146,7 +4146,7 @@
       "y": 0
     },
     "facing=down,bulb_kind=4,color=red,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_red_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_red_4_flicker_base",
       "x": 180,
       "y": 0
     },
@@ -4156,7 +4156,7 @@
       "y": 0
     },
     "facing=down,bulb_kind=4,color=black,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_black_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_black_4_flicker_base",
       "x": 180,
       "y": 0
     },
@@ -4166,7 +4166,7 @@
       "y": 0
     },
     "facing=north,bulb_kind=4,color=white,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_white_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_white_4_flicker_base",
       "x": 90,
       "y": 0
     },
@@ -4176,7 +4176,7 @@
       "y": 0
     },
     "facing=north,bulb_kind=4,color=orange,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_orange_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_orange_4_flicker_base",
       "x": 90,
       "y": 0
     },
@@ -4186,7 +4186,7 @@
       "y": 0
     },
     "facing=north,bulb_kind=4,color=magenta,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_magenta_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_magenta_4_flicker_base",
       "x": 90,
       "y": 0
     },
@@ -4196,7 +4196,7 @@
       "y": 0
     },
     "facing=north,bulb_kind=4,color=light_blue,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_light_blue_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_light_blue_4_flicker_base",
       "x": 90,
       "y": 0
     },
@@ -4206,7 +4206,7 @@
       "y": 0
     },
     "facing=north,bulb_kind=4,color=yellow,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_yellow_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_yellow_4_flicker_base",
       "x": 90,
       "y": 0
     },
@@ -4216,7 +4216,7 @@
       "y": 0
     },
     "facing=north,bulb_kind=4,color=lime,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_lime_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_lime_4_flicker_base",
       "x": 90,
       "y": 0
     },
@@ -4226,7 +4226,7 @@
       "y": 0
     },
     "facing=north,bulb_kind=4,color=pink,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_pink_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_pink_4_flicker_base",
       "x": 90,
       "y": 0
     },
@@ -4236,7 +4236,7 @@
       "y": 0
     },
     "facing=north,bulb_kind=4,color=gray,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_gray_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_gray_4_flicker_base",
       "x": 90,
       "y": 0
     },
@@ -4246,7 +4246,7 @@
       "y": 0
     },
     "facing=north,bulb_kind=4,color=light_gray,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_light_gray_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_light_gray_4_flicker_base",
       "x": 90,
       "y": 0
     },
@@ -4256,7 +4256,7 @@
       "y": 0
     },
     "facing=north,bulb_kind=4,color=cyan,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_cyan_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_cyan_4_flicker_base",
       "x": 90,
       "y": 0
     },
@@ -4266,7 +4266,7 @@
       "y": 0
     },
     "facing=north,bulb_kind=4,color=purple,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_purple_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_purple_4_flicker_base",
       "x": 90,
       "y": 0
     },
@@ -4276,7 +4276,7 @@
       "y": 0
     },
     "facing=north,bulb_kind=4,color=blue,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_blue_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_blue_4_flicker_base",
       "x": 90,
       "y": 0
     },
@@ -4286,7 +4286,7 @@
       "y": 0
     },
     "facing=north,bulb_kind=4,color=brown,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_brown_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_brown_4_flicker_base",
       "x": 90,
       "y": 0
     },
@@ -4296,7 +4296,7 @@
       "y": 0
     },
     "facing=north,bulb_kind=4,color=green,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_green_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_green_4_flicker_base",
       "x": 90,
       "y": 0
     },
@@ -4306,7 +4306,7 @@
       "y": 0
     },
     "facing=north,bulb_kind=4,color=red,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_red_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_red_4_flicker_base",
       "x": 90,
       "y": 0
     },
@@ -4316,7 +4316,7 @@
       "y": 0
     },
     "facing=north,bulb_kind=4,color=black,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_black_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_black_4_flicker_base",
       "x": 90,
       "y": 0
     },
@@ -4326,7 +4326,7 @@
       "y": 0
     },
     "facing=south,bulb_kind=4,color=white,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_white_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_white_4_flicker_base",
       "x": 270,
       "y": 0
     },
@@ -4336,7 +4336,7 @@
       "y": 0
     },
     "facing=south,bulb_kind=4,color=orange,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_orange_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_orange_4_flicker_base",
       "x": 270,
       "y": 0
     },
@@ -4346,7 +4346,7 @@
       "y": 0
     },
     "facing=south,bulb_kind=4,color=magenta,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_magenta_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_magenta_4_flicker_base",
       "x": 270,
       "y": 0
     },
@@ -4356,7 +4356,7 @@
       "y": 0
     },
     "facing=south,bulb_kind=4,color=light_blue,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_light_blue_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_light_blue_4_flicker_base",
       "x": 270,
       "y": 0
     },
@@ -4366,7 +4366,7 @@
       "y": 0
     },
     "facing=south,bulb_kind=4,color=yellow,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_yellow_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_yellow_4_flicker_base",
       "x": 270,
       "y": 0
     },
@@ -4376,7 +4376,7 @@
       "y": 0
     },
     "facing=south,bulb_kind=4,color=lime,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_lime_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_lime_4_flicker_base",
       "x": 270,
       "y": 0
     },
@@ -4386,7 +4386,7 @@
       "y": 0
     },
     "facing=south,bulb_kind=4,color=pink,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_pink_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_pink_4_flicker_base",
       "x": 270,
       "y": 0
     },
@@ -4396,7 +4396,7 @@
       "y": 0
     },
     "facing=south,bulb_kind=4,color=gray,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_gray_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_gray_4_flicker_base",
       "x": 270,
       "y": 0
     },
@@ -4406,7 +4406,7 @@
       "y": 0
     },
     "facing=south,bulb_kind=4,color=light_gray,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_light_gray_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_light_gray_4_flicker_base",
       "x": 270,
       "y": 0
     },
@@ -4416,7 +4416,7 @@
       "y": 0
     },
     "facing=south,bulb_kind=4,color=cyan,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_cyan_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_cyan_4_flicker_base",
       "x": 270,
       "y": 0
     },
@@ -4426,7 +4426,7 @@
       "y": 0
     },
     "facing=south,bulb_kind=4,color=purple,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_purple_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_purple_4_flicker_base",
       "x": 270,
       "y": 0
     },
@@ -4436,7 +4436,7 @@
       "y": 0
     },
     "facing=south,bulb_kind=4,color=blue,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_blue_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_blue_4_flicker_base",
       "x": 270,
       "y": 0
     },
@@ -4446,7 +4446,7 @@
       "y": 0
     },
     "facing=south,bulb_kind=4,color=brown,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_brown_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_brown_4_flicker_base",
       "x": 270,
       "y": 0
     },
@@ -4456,7 +4456,7 @@
       "y": 0
     },
     "facing=south,bulb_kind=4,color=green,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_green_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_green_4_flicker_base",
       "x": 270,
       "y": 0
     },
@@ -4466,7 +4466,7 @@
       "y": 0
     },
     "facing=south,bulb_kind=4,color=red,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_red_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_red_4_flicker_base",
       "x": 270,
       "y": 0
     },
@@ -4476,7 +4476,7 @@
       "y": 0
     },
     "facing=south,bulb_kind=4,color=black,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_black_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_black_4_flicker_base",
       "x": 270,
       "y": 0
     },
@@ -4486,7 +4486,7 @@
       "y": 90
     },
     "facing=east,bulb_kind=4,color=white,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_white_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_white_4_flicker_base",
       "x": 90,
       "y": 90
     },
@@ -4496,7 +4496,7 @@
       "y": 90
     },
     "facing=east,bulb_kind=4,color=orange,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_orange_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_orange_4_flicker_base",
       "x": 90,
       "y": 90
     },
@@ -4506,7 +4506,7 @@
       "y": 90
     },
     "facing=east,bulb_kind=4,color=magenta,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_magenta_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_magenta_4_flicker_base",
       "x": 90,
       "y": 90
     },
@@ -4516,7 +4516,7 @@
       "y": 90
     },
     "facing=east,bulb_kind=4,color=light_blue,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_light_blue_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_light_blue_4_flicker_base",
       "x": 90,
       "y": 90
     },
@@ -4526,7 +4526,7 @@
       "y": 90
     },
     "facing=east,bulb_kind=4,color=yellow,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_yellow_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_yellow_4_flicker_base",
       "x": 90,
       "y": 90
     },
@@ -4536,7 +4536,7 @@
       "y": 90
     },
     "facing=east,bulb_kind=4,color=lime,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_lime_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_lime_4_flicker_base",
       "x": 90,
       "y": 90
     },
@@ -4546,7 +4546,7 @@
       "y": 90
     },
     "facing=east,bulb_kind=4,color=pink,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_pink_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_pink_4_flicker_base",
       "x": 90,
       "y": 90
     },
@@ -4556,7 +4556,7 @@
       "y": 90
     },
     "facing=east,bulb_kind=4,color=gray,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_gray_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_gray_4_flicker_base",
       "x": 90,
       "y": 90
     },
@@ -4566,7 +4566,7 @@
       "y": 90
     },
     "facing=east,bulb_kind=4,color=light_gray,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_light_gray_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_light_gray_4_flicker_base",
       "x": 90,
       "y": 90
     },
@@ -4576,7 +4576,7 @@
       "y": 90
     },
     "facing=east,bulb_kind=4,color=cyan,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_cyan_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_cyan_4_flicker_base",
       "x": 90,
       "y": 90
     },
@@ -4586,7 +4586,7 @@
       "y": 90
     },
     "facing=east,bulb_kind=4,color=purple,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_purple_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_purple_4_flicker_base",
       "x": 90,
       "y": 90
     },
@@ -4596,7 +4596,7 @@
       "y": 90
     },
     "facing=east,bulb_kind=4,color=blue,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_blue_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_blue_4_flicker_base",
       "x": 90,
       "y": 90
     },
@@ -4606,7 +4606,7 @@
       "y": 90
     },
     "facing=east,bulb_kind=4,color=brown,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_brown_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_brown_4_flicker_base",
       "x": 90,
       "y": 90
     },
@@ -4616,7 +4616,7 @@
       "y": 90
     },
     "facing=east,bulb_kind=4,color=green,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_green_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_green_4_flicker_base",
       "x": 90,
       "y": 90
     },
@@ -4626,7 +4626,7 @@
       "y": 90
     },
     "facing=east,bulb_kind=4,color=red,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_red_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_red_4_flicker_base",
       "x": 90,
       "y": 90
     },
@@ -4636,7 +4636,7 @@
       "y": 90
     },
     "facing=east,bulb_kind=4,color=black,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_black_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_black_4_flicker_base",
       "x": 90,
       "y": 90
     },
@@ -4646,7 +4646,7 @@
       "y": 270
     },
     "facing=west,bulb_kind=4,color=white,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_white_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_white_4_flicker_base",
       "x": 90,
       "y": 270
     },
@@ -4656,7 +4656,7 @@
       "y": 270
     },
     "facing=west,bulb_kind=4,color=orange,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_orange_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_orange_4_flicker_base",
       "x": 90,
       "y": 270
     },
@@ -4666,7 +4666,7 @@
       "y": 270
     },
     "facing=west,bulb_kind=4,color=magenta,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_magenta_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_magenta_4_flicker_base",
       "x": 90,
       "y": 270
     },
@@ -4676,7 +4676,7 @@
       "y": 270
     },
     "facing=west,bulb_kind=4,color=light_blue,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_light_blue_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_light_blue_4_flicker_base",
       "x": 90,
       "y": 270
     },
@@ -4686,7 +4686,7 @@
       "y": 270
     },
     "facing=west,bulb_kind=4,color=yellow,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_yellow_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_yellow_4_flicker_base",
       "x": 90,
       "y": 270
     },
@@ -4696,7 +4696,7 @@
       "y": 270
     },
     "facing=west,bulb_kind=4,color=lime,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_lime_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_lime_4_flicker_base",
       "x": 90,
       "y": 270
     },
@@ -4706,7 +4706,7 @@
       "y": 270
     },
     "facing=west,bulb_kind=4,color=pink,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_pink_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_pink_4_flicker_base",
       "x": 90,
       "y": 270
     },
@@ -4716,7 +4716,7 @@
       "y": 270
     },
     "facing=west,bulb_kind=4,color=gray,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_gray_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_gray_4_flicker_base",
       "x": 90,
       "y": 270
     },
@@ -4726,7 +4726,7 @@
       "y": 270
     },
     "facing=west,bulb_kind=4,color=light_gray,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_light_gray_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_light_gray_4_flicker_base",
       "x": 90,
       "y": 270
     },
@@ -4736,7 +4736,7 @@
       "y": 270
     },
     "facing=west,bulb_kind=4,color=cyan,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_cyan_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_cyan_4_flicker_base",
       "x": 90,
       "y": 270
     },
@@ -4746,7 +4746,7 @@
       "y": 270
     },
     "facing=west,bulb_kind=4,color=purple,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_purple_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_purple_4_flicker_base",
       "x": 90,
       "y": 270
     },
@@ -4756,7 +4756,7 @@
       "y": 270
     },
     "facing=west,bulb_kind=4,color=blue,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_blue_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_blue_4_flicker_base",
       "x": 90,
       "y": 270
     },
@@ -4766,7 +4766,7 @@
       "y": 270
     },
     "facing=west,bulb_kind=4,color=brown,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_brown_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_brown_4_flicker_base",
       "x": 90,
       "y": 270
     },
@@ -4776,7 +4776,7 @@
       "y": 270
     },
     "facing=west,bulb_kind=4,color=green,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_green_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_green_4_flicker_base",
       "x": 90,
       "y": 270
     },
@@ -4786,7 +4786,7 @@
       "y": 270
     },
     "facing=west,bulb_kind=4,color=red,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_red_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_red_4_flicker_base",
       "x": 90,
       "y": 270
     },
@@ -4796,7 +4796,7 @@
       "y": 270
     },
     "facing=west,bulb_kind=4,color=black,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_black_4_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_black_4_flicker_base",
       "x": 90,
       "y": 270
     }

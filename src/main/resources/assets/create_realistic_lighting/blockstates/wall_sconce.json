@@ -2289,19 +2289,19 @@
       "y": 270
     },
     "facing=south,bulb_kind=4,color=gray,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_gray_4_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_gray_4_flicker_base",
       "y": 0
     },
     "facing=west,bulb_kind=4,color=gray,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_gray_4_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_gray_4_flicker_base",
       "y": 90
     },
     "facing=north,bulb_kind=4,color=gray,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_gray_4_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_gray_4_flicker_base",
       "y": 180
     },
     "facing=east,bulb_kind=4,color=gray,lit=true": {
-      "model": "create_realistic_lighting:block/wall_sconce_gray_4_lit",
+      "model": "create_realistic_lighting:block/wall_sconce_gray_4_flicker_base",
       "y": 270
     },
     "facing=south,bulb_kind=4,color=light_gray,lit=false": {
