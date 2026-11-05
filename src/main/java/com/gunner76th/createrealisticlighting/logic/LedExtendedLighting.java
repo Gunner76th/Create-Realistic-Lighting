@@ -17,7 +17,7 @@ import java.util.Set;
 
 /** Fixture-centered, obstruction-aware LED lighting with surface-biased samples. */
 public final class LedExtendedLighting {
-    private static final int MAX_RADIUS = 16;
+    private static final int MAX_RADIUS = 24;
     private static final int SURFACE_STEP = 2;
     private static final int VOLUME_STEP = 4;
     private static final int MAX_SURFACE_DROP = 16;
@@ -100,7 +100,7 @@ public final class LedExtendedLighting {
         return hit.getType() == HitResult.Type.MISS || hit.getBlockPos().equals(target);
     }
 
-    /** Radial 15-to-1 falloff over the configured 16-block sampling radius. */
+    /** Radial 15-to-1 falloff over the configured 24-block sampling radius. */
     public static int strength(BlockPos fixture, BlockPos node, BlockState state) {
         double distance = Math.sqrt(node.distSqr(fixture));
         return Math.max(1, Math.min(15,
