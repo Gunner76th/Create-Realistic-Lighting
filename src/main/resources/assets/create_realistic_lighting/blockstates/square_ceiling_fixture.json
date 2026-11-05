@@ -151,32 +151,32 @@
       "y": 90
     },
     "facing=up,bulb_kind=2,color=white,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_white_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_white_2_flicker_base",
       "x": 0,
       "y": 0
     },
     "facing=down,bulb_kind=2,color=white,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_white_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_white_2_flicker_base",
       "x": 180,
       "y": 0
     },
     "facing=north,bulb_kind=2,color=white,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_white_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_white_2_flicker_base",
       "x": 90,
       "y": 0
     },
     "facing=south,bulb_kind=2,color=white,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_white_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_white_2_flicker_base",
       "x": 90,
       "y": 180
     },
     "facing=west,bulb_kind=2,color=white,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_white_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_white_2_flicker_base",
       "x": 90,
       "y": 270
     },
     "facing=east,bulb_kind=2,color=white,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_white_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_white_2_flicker_base",
       "x": 90,
       "y": 90
     },
@@ -391,32 +391,32 @@
       "y": 90
     },
     "facing=up,bulb_kind=2,color=orange,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_orange_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_orange_2_flicker_base",
       "x": 0,
       "y": 0
     },
     "facing=down,bulb_kind=2,color=orange,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_orange_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_orange_2_flicker_base",
       "x": 180,
       "y": 0
     },
     "facing=north,bulb_kind=2,color=orange,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_orange_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_orange_2_flicker_base",
       "x": 90,
       "y": 0
     },
     "facing=south,bulb_kind=2,color=orange,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_orange_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_orange_2_flicker_base",
       "x": 90,
       "y": 180
     },
     "facing=west,bulb_kind=2,color=orange,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_orange_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_orange_2_flicker_base",
       "x": 90,
       "y": 270
     },
     "facing=east,bulb_kind=2,color=orange,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_orange_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_orange_2_flicker_base",
       "x": 90,
       "y": 90
     },
@@ -631,32 +631,32 @@
       "y": 90
     },
     "facing=up,bulb_kind=2,color=magenta,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_magenta_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_magenta_2_flicker_base",
       "x": 0,
       "y": 0
     },
     "facing=down,bulb_kind=2,color=magenta,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_magenta_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_magenta_2_flicker_base",
       "x": 180,
       "y": 0
     },
     "facing=north,bulb_kind=2,color=magenta,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_magenta_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_magenta_2_flicker_base",
       "x": 90,
       "y": 0
     },
     "facing=south,bulb_kind=2,color=magenta,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_magenta_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_magenta_2_flicker_base",
       "x": 90,
       "y": 180
     },
     "facing=west,bulb_kind=2,color=magenta,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_magenta_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_magenta_2_flicker_base",
       "x": 90,
       "y": 270
     },
     "facing=east,bulb_kind=2,color=magenta,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_magenta_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_magenta_2_flicker_base",
       "x": 90,
       "y": 90
     },
@@ -871,32 +871,32 @@
       "y": 90
     },
     "facing=up,bulb_kind=2,color=light_blue,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_light_blue_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_light_blue_2_flicker_base",
       "x": 0,
       "y": 0
     },
     "facing=down,bulb_kind=2,color=light_blue,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_light_blue_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_light_blue_2_flicker_base",
       "x": 180,
       "y": 0
     },
     "facing=north,bulb_kind=2,color=light_blue,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_light_blue_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_light_blue_2_flicker_base",
       "x": 90,
       "y": 0
     },
     "facing=south,bulb_kind=2,color=light_blue,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_light_blue_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_light_blue_2_flicker_base",
       "x": 90,
       "y": 180
     },
     "facing=west,bulb_kind=2,color=light_blue,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_light_blue_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_light_blue_2_flicker_base",
       "x": 90,
       "y": 270
     },
     "facing=east,bulb_kind=2,color=light_blue,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_light_blue_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_light_blue_2_flicker_base",
       "x": 90,
       "y": 90
     },
@@ -1111,32 +1111,32 @@
       "y": 90
     },
     "facing=up,bulb_kind=2,color=yellow,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_yellow_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_yellow_2_flicker_base",
       "x": 0,
       "y": 0
     },
     "facing=down,bulb_kind=2,color=yellow,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_yellow_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_yellow_2_flicker_base",
       "x": 180,
       "y": 0
     },
     "facing=north,bulb_kind=2,color=yellow,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_yellow_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_yellow_2_flicker_base",
       "x": 90,
       "y": 0
     },
     "facing=south,bulb_kind=2,color=yellow,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_yellow_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_yellow_2_flicker_base",
       "x": 90,
       "y": 180
     },
     "facing=west,bulb_kind=2,color=yellow,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_yellow_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_yellow_2_flicker_base",
       "x": 90,
       "y": 270
     },
     "facing=east,bulb_kind=2,color=yellow,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_yellow_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_yellow_2_flicker_base",
       "x": 90,
       "y": 90
     },
@@ -1351,32 +1351,32 @@
       "y": 90
     },
     "facing=up,bulb_kind=2,color=lime,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_lime_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_lime_2_flicker_base",
       "x": 0,
       "y": 0
     },
     "facing=down,bulb_kind=2,color=lime,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_lime_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_lime_2_flicker_base",
       "x": 180,
       "y": 0
     },
     "facing=north,bulb_kind=2,color=lime,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_lime_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_lime_2_flicker_base",
       "x": 90,
       "y": 0
     },
     "facing=south,bulb_kind=2,color=lime,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_lime_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_lime_2_flicker_base",
       "x": 90,
       "y": 180
     },
     "facing=west,bulb_kind=2,color=lime,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_lime_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_lime_2_flicker_base",
       "x": 90,
       "y": 270
     },
     "facing=east,bulb_kind=2,color=lime,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_lime_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_lime_2_flicker_base",
       "x": 90,
       "y": 90
     },
@@ -1591,32 +1591,32 @@
       "y": 90
     },
     "facing=up,bulb_kind=2,color=pink,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_pink_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_pink_2_flicker_base",
       "x": 0,
       "y": 0
     },
     "facing=down,bulb_kind=2,color=pink,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_pink_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_pink_2_flicker_base",
       "x": 180,
       "y": 0
     },
     "facing=north,bulb_kind=2,color=pink,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_pink_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_pink_2_flicker_base",
       "x": 90,
       "y": 0
     },
     "facing=south,bulb_kind=2,color=pink,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_pink_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_pink_2_flicker_base",
       "x": 90,
       "y": 180
     },
     "facing=west,bulb_kind=2,color=pink,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_pink_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_pink_2_flicker_base",
       "x": 90,
       "y": 270
     },
     "facing=east,bulb_kind=2,color=pink,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_pink_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_pink_2_flicker_base",
       "x": 90,
       "y": 90
     },
@@ -1831,32 +1831,32 @@
       "y": 90
     },
     "facing=up,bulb_kind=2,color=gray,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_gray_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_gray_2_flicker_base",
       "x": 0,
       "y": 0
     },
     "facing=down,bulb_kind=2,color=gray,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_gray_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_gray_2_flicker_base",
       "x": 180,
       "y": 0
     },
     "facing=north,bulb_kind=2,color=gray,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_gray_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_gray_2_flicker_base",
       "x": 90,
       "y": 0
     },
     "facing=south,bulb_kind=2,color=gray,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_gray_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_gray_2_flicker_base",
       "x": 90,
       "y": 180
     },
     "facing=west,bulb_kind=2,color=gray,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_gray_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_gray_2_flicker_base",
       "x": 90,
       "y": 270
     },
     "facing=east,bulb_kind=2,color=gray,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_gray_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_gray_2_flicker_base",
       "x": 90,
       "y": 90
     },
@@ -2071,32 +2071,32 @@
       "y": 90
     },
     "facing=up,bulb_kind=2,color=light_gray,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_light_gray_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_light_gray_2_flicker_base",
       "x": 0,
       "y": 0
     },
     "facing=down,bulb_kind=2,color=light_gray,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_light_gray_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_light_gray_2_flicker_base",
       "x": 180,
       "y": 0
     },
     "facing=north,bulb_kind=2,color=light_gray,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_light_gray_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_light_gray_2_flicker_base",
       "x": 90,
       "y": 0
     },
     "facing=south,bulb_kind=2,color=light_gray,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_light_gray_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_light_gray_2_flicker_base",
       "x": 90,
       "y": 180
     },
     "facing=west,bulb_kind=2,color=light_gray,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_light_gray_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_light_gray_2_flicker_base",
       "x": 90,
       "y": 270
     },
     "facing=east,bulb_kind=2,color=light_gray,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_light_gray_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_light_gray_2_flicker_base",
       "x": 90,
       "y": 90
     },
@@ -2311,32 +2311,32 @@
       "y": 90
     },
     "facing=up,bulb_kind=2,color=cyan,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_cyan_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_cyan_2_flicker_base",
       "x": 0,
       "y": 0
     },
     "facing=down,bulb_kind=2,color=cyan,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_cyan_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_cyan_2_flicker_base",
       "x": 180,
       "y": 0
     },
     "facing=north,bulb_kind=2,color=cyan,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_cyan_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_cyan_2_flicker_base",
       "x": 90,
       "y": 0
     },
     "facing=south,bulb_kind=2,color=cyan,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_cyan_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_cyan_2_flicker_base",
       "x": 90,
       "y": 180
     },
     "facing=west,bulb_kind=2,color=cyan,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_cyan_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_cyan_2_flicker_base",
       "x": 90,
       "y": 270
     },
     "facing=east,bulb_kind=2,color=cyan,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_cyan_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_cyan_2_flicker_base",
       "x": 90,
       "y": 90
     },
@@ -2551,32 +2551,32 @@
       "y": 90
     },
     "facing=up,bulb_kind=2,color=purple,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_purple_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_purple_2_flicker_base",
       "x": 0,
       "y": 0
     },
     "facing=down,bulb_kind=2,color=purple,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_purple_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_purple_2_flicker_base",
       "x": 180,
       "y": 0
     },
     "facing=north,bulb_kind=2,color=purple,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_purple_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_purple_2_flicker_base",
       "x": 90,
       "y": 0
     },
     "facing=south,bulb_kind=2,color=purple,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_purple_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_purple_2_flicker_base",
       "x": 90,
       "y": 180
     },
     "facing=west,bulb_kind=2,color=purple,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_purple_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_purple_2_flicker_base",
       "x": 90,
       "y": 270
     },
     "facing=east,bulb_kind=2,color=purple,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_purple_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_purple_2_flicker_base",
       "x": 90,
       "y": 90
     },
@@ -2791,32 +2791,32 @@
       "y": 90
     },
     "facing=up,bulb_kind=2,color=blue,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_blue_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_blue_2_flicker_base",
       "x": 0,
       "y": 0
     },
     "facing=down,bulb_kind=2,color=blue,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_blue_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_blue_2_flicker_base",
       "x": 180,
       "y": 0
     },
     "facing=north,bulb_kind=2,color=blue,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_blue_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_blue_2_flicker_base",
       "x": 90,
       "y": 0
     },
     "facing=south,bulb_kind=2,color=blue,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_blue_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_blue_2_flicker_base",
       "x": 90,
       "y": 180
     },
     "facing=west,bulb_kind=2,color=blue,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_blue_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_blue_2_flicker_base",
       "x": 90,
       "y": 270
     },
     "facing=east,bulb_kind=2,color=blue,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_blue_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_blue_2_flicker_base",
       "x": 90,
       "y": 90
     },
@@ -3031,32 +3031,32 @@
       "y": 90
     },
     "facing=up,bulb_kind=2,color=brown,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_brown_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_brown_2_flicker_base",
       "x": 0,
       "y": 0
     },
     "facing=down,bulb_kind=2,color=brown,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_brown_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_brown_2_flicker_base",
       "x": 180,
       "y": 0
     },
     "facing=north,bulb_kind=2,color=brown,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_brown_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_brown_2_flicker_base",
       "x": 90,
       "y": 0
     },
     "facing=south,bulb_kind=2,color=brown,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_brown_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_brown_2_flicker_base",
       "x": 90,
       "y": 180
     },
     "facing=west,bulb_kind=2,color=brown,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_brown_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_brown_2_flicker_base",
       "x": 90,
       "y": 270
     },
     "facing=east,bulb_kind=2,color=brown,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_brown_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_brown_2_flicker_base",
       "x": 90,
       "y": 90
     },
@@ -3271,32 +3271,32 @@
       "y": 90
     },
     "facing=up,bulb_kind=2,color=green,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_green_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_green_2_flicker_base",
       "x": 0,
       "y": 0
     },
     "facing=down,bulb_kind=2,color=green,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_green_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_green_2_flicker_base",
       "x": 180,
       "y": 0
     },
     "facing=north,bulb_kind=2,color=green,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_green_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_green_2_flicker_base",
       "x": 90,
       "y": 0
     },
     "facing=south,bulb_kind=2,color=green,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_green_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_green_2_flicker_base",
       "x": 90,
       "y": 180
     },
     "facing=west,bulb_kind=2,color=green,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_green_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_green_2_flicker_base",
       "x": 90,
       "y": 270
     },
     "facing=east,bulb_kind=2,color=green,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_green_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_green_2_flicker_base",
       "x": 90,
       "y": 90
     },
@@ -3511,32 +3511,32 @@
       "y": 90
     },
     "facing=up,bulb_kind=2,color=red,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_red_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_red_2_flicker_base",
       "x": 0,
       "y": 0
     },
     "facing=down,bulb_kind=2,color=red,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_red_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_red_2_flicker_base",
       "x": 180,
       "y": 0
     },
     "facing=north,bulb_kind=2,color=red,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_red_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_red_2_flicker_base",
       "x": 90,
       "y": 0
     },
     "facing=south,bulb_kind=2,color=red,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_red_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_red_2_flicker_base",
       "x": 90,
       "y": 180
     },
     "facing=west,bulb_kind=2,color=red,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_red_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_red_2_flicker_base",
       "x": 90,
       "y": 270
     },
     "facing=east,bulb_kind=2,color=red,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_red_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_red_2_flicker_base",
       "x": 90,
       "y": 90
     },
@@ -3751,32 +3751,32 @@
       "y": 90
     },
     "facing=up,bulb_kind=2,color=black,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_black_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_black_2_flicker_base",
       "x": 0,
       "y": 0
     },
     "facing=down,bulb_kind=2,color=black,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_black_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_black_2_flicker_base",
       "x": 180,
       "y": 0
     },
     "facing=north,bulb_kind=2,color=black,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_black_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_black_2_flicker_base",
       "x": 90,
       "y": 0
     },
     "facing=south,bulb_kind=2,color=black,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_black_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_black_2_flicker_base",
       "x": 90,
       "y": 180
     },
     "facing=west,bulb_kind=2,color=black,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_black_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_black_2_flicker_base",
       "x": 90,
       "y": 270
     },
     "facing=east,bulb_kind=2,color=black,lit=true": {
-      "model": "create_realistic_lighting:block/square_ceiling_fixture_black_2_lit",
+      "model": "create_realistic_lighting:block/square_ceiling_fixture_black_2_flicker_base",
       "x": 90,
       "y": 90
     },
