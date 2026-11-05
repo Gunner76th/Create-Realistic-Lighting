@@ -306,7 +306,7 @@
       "y": 0
     },
     "facing=up,bulb_kind=2,color=gray,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_gray_2_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_gray_2_flicker_base",
       "x": 0,
       "y": 0
     },
@@ -946,7 +946,7 @@
       "y": 0
     },
     "facing=down,bulb_kind=2,color=gray,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_gray_2_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_gray_2_flicker_base",
       "x": 180,
       "y": 0
     },
@@ -1586,7 +1586,7 @@
       "y": 0
     },
     "facing=north,bulb_kind=2,color=gray,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_gray_2_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_gray_2_flicker_base",
       "x": 90,
       "y": 0
     },
@@ -2226,7 +2226,7 @@
       "y": 0
     },
     "facing=south,bulb_kind=2,color=gray,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_gray_2_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_gray_2_flicker_base",
       "x": 270,
       "y": 0
     },
@@ -2866,7 +2866,7 @@
       "y": 90
     },
     "facing=east,bulb_kind=2,color=gray,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_gray_2_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_gray_2_flicker_base",
       "x": 90,
       "y": 90
     },
@@ -3506,7 +3506,7 @@
       "y": 270
     },
     "facing=west,bulb_kind=2,color=gray,lit=true": {
-      "model": "create_realistic_lighting:block/industrial_fixture_gray_2_lit",
+      "model": "create_realistic_lighting:block/industrial_fixture_gray_2_flicker_base",
       "x": 90,
       "y": 270
     },

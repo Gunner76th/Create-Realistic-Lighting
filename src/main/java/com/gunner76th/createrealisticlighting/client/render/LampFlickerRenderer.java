@@ -21,29 +21,48 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.state.BlockState;
 
 public final class LampFlickerRenderer implements BlockEntityRenderer<LampBaseBlockEntity> {
-  private static final ModelResourceLocation LED_LIT_MODEL = ModelResourceLocation.standalone(
-      ResourceLocation.fromNamespaceAndPath("create_realistic_lighting",
-          "block/industrial_fixture_gray_3_flicker_bulb_lit"));
 
-  private static final ModelResourceLocation LED_OFF_MODEL = ModelResourceLocation.standalone(
-      ResourceLocation.fromNamespaceAndPath("create_realistic_lighting",
-          "block/industrial_fixture_gray_3_flicker_bulb_off"));
+  private static final ModelResourceLocation FLUORESCENT_LIT_MODEL =
+      ModelResourceLocation.standalone(
+          ResourceLocation.fromNamespaceAndPath(
+              "create_realistic_lighting", "block/industrial_fixture_gray_2_flicker_bulb_lit"));
 
-  private static final ModelResourceLocation CEILING_LIT_MODEL = ModelResourceLocation.standalone(
-      ResourceLocation.fromNamespaceAndPath("create_realistic_lighting",
-          "block/square_ceiling_fixture_gray_3_flicker_diffuser_lit"));
+  private static final ModelResourceLocation FLUORESCENT_OFF_MODEL =
+      ModelResourceLocation.standalone(
+          ResourceLocation.fromNamespaceAndPath(
+              "create_realistic_lighting", "block/industrial_fixture_gray_2_flicker_bulb_off"));
 
-  private static final ModelResourceLocation CEILING_OFF_MODEL = ModelResourceLocation.standalone(
-      ResourceLocation.fromNamespaceAndPath("create_realistic_lighting",
-          "block/square_ceiling_fixture_gray_3_flicker_diffuser_off"));
+  private static final ModelResourceLocation LED_LIT_MODEL =
+      ModelResourceLocation.standalone(
+          ResourceLocation.fromNamespaceAndPath(
+              "create_realistic_lighting", "block/industrial_fixture_gray_3_flicker_bulb_lit"));
 
-  private static final ModelResourceLocation SCONCE_LIT_MODEL = ModelResourceLocation.standalone(
-      ResourceLocation.fromNamespaceAndPath("create_realistic_lighting",
-          "block/wall_sconce_gray_3_flicker_bulb_lit"));
+  private static final ModelResourceLocation LED_OFF_MODEL =
+      ModelResourceLocation.standalone(
+          ResourceLocation.fromNamespaceAndPath(
+              "create_realistic_lighting", "block/industrial_fixture_gray_3_flicker_bulb_off"));
 
-  private static final ModelResourceLocation SCONCE_OFF_MODEL = ModelResourceLocation.standalone(
-      ResourceLocation.fromNamespaceAndPath("create_realistic_lighting",
-          "block/wall_sconce_gray_3_flicker_bulb_off"));
+  private static final ModelResourceLocation CEILING_LIT_MODEL =
+      ModelResourceLocation.standalone(
+          ResourceLocation.fromNamespaceAndPath(
+              "create_realistic_lighting",
+              "block/square_ceiling_fixture_gray_3_flicker_diffuser_lit"));
+
+  private static final ModelResourceLocation CEILING_OFF_MODEL =
+      ModelResourceLocation.standalone(
+          ResourceLocation.fromNamespaceAndPath(
+              "create_realistic_lighting",
+              "block/square_ceiling_fixture_gray_3_flicker_diffuser_off"));
+
+  private static final ModelResourceLocation SCONCE_LIT_MODEL =
+      ModelResourceLocation.standalone(
+          ResourceLocation.fromNamespaceAndPath(
+              "create_realistic_lighting", "block/wall_sconce_gray_3_flicker_bulb_lit"));
+
+  private static final ModelResourceLocation SCONCE_OFF_MODEL =
+      ModelResourceLocation.standalone(
+          ResourceLocation.fromNamespaceAndPath(
+              "create_realistic_lighting", "block/wall_sconce_gray_3_flicker_bulb_off"));
 
   private final BlockRenderDispatcher blockRenderer;
 
@@ -92,8 +111,9 @@ public final class LampFlickerRenderer implements BlockEntityRenderer<LampBaseBl
       long seed = mix(pos ^ (candidate * 0x9e3779b97f4a7c15L));
       if (unit(seed ^ 0x632be59bd9b4e019L) >= probability) continue;
       int startOffset = (int) (unit(seed ^ 0x8cb92ba72f3d8dd7L) * 8);
-      int duration = minDarkTicks + (int) (unit(seed ^ 0x4f1bbcdc676dbb51L)
-          * (maxDarkTicks - minDarkTicks + 1));
+      int duration =
+          minDarkTicks
+              + (int) (unit(seed ^ 0x4f1bbcdc676dbb51L) * (maxDarkTicks - minDarkTicks + 1));
       double start = candidate * 8.0 + startOffset;
       if (time >= start && time < start + duration) return false;
     }
@@ -105,24 +125,46 @@ public final class LampFlickerRenderer implements BlockEntityRenderer<LampBaseBl
   }
 
   @Override
-  public void render(LampBaseBlockEntity lamp, float partialTick, PoseStack poseStack,
-      MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
+  public void render(
+      LampBaseBlockEntity lamp,
+      float partialTick,
+      PoseStack poseStack,
+      MultiBufferSource bufferSource,
+      int packedLight,
+      int packedOverlay) {
     BlockState state = lamp.getBlockState();
     boolean sconce = state.getBlock() instanceof WallSconceBlock;
     boolean industrial = state.getBlock() instanceof IndustrialFixtureBlock;
     boolean ceiling = state.getBlock() instanceof SquareCeilingFixtureBlock;
-    // All three fixture types support every dye color for LED visual flickering.
+
+    int bulbKind = state.getValue(IndustrialFixtureBlock.BULB_KIND);
+
+    // LED flickering works on all fixture types and colors.
+    // Fluorescent flickering is currently limited to the gray industrial prototype.
+    boolean led = bulbKind == 3;
+    boolean fluorescent =
+        bulbKind == 2
+            && industrial
+            && state.getValue(IndustrialFixtureBlock.COLOR)
+                == net.minecraft.world.item.DyeColor.GRAY;
+
     if ((!industrial && !ceiling && !sconce)
-        || state.getValue(IndustrialFixtureBlock.BULB_KIND) != 3
+        || (!led && !fluorescent)
         || !state.getValue(LampBaseBlock.LIT)) {
       return;
     }
-
     boolean lit = showLitBulb(lamp, partialTick);
-    ModelResourceLocation modelId = sconce
-        ? (lit ? SCONCE_LIT_MODEL : SCONCE_OFF_MODEL)
-        : ceiling ? (lit ? CEILING_LIT_MODEL : CEILING_OFF_MODEL)
-        : (lit ? LED_LIT_MODEL : LED_OFF_MODEL);
+
+    ModelResourceLocation modelId;
+    if (fluorescent) {
+      modelId = lit ? FLUORESCENT_LIT_MODEL : FLUORESCENT_OFF_MODEL;
+    } else if (sconce) {
+      modelId = lit ? SCONCE_LIT_MODEL : SCONCE_OFF_MODEL;
+    } else if (ceiling) {
+      modelId = lit ? CEILING_LIT_MODEL : CEILING_OFF_MODEL;
+    } else {
+      modelId = lit ? LED_LIT_MODEL : LED_OFF_MODEL;
+    }
     BakedModel bulb = Minecraft.getInstance().getModelManager().getModel(modelId);
     VertexConsumer vertices = bufferSource.getBuffer(RenderType.cutout());
 
@@ -131,16 +173,16 @@ public final class LampFlickerRenderer implements BlockEntityRenderer<LampBaseBl
     if (sconce) {
       // The wall sconce base model faces SOUTH. Match wall_sconce.json Y rotations.
       switch (state.getValue(IndustrialFixtureBlock.FACING)) {
-        case SOUTH -> { }
+        case SOUTH -> {}
         case WEST -> poseStack.mulPose(Axis.YP.rotationDegrees(90));
         case NORTH -> poseStack.mulPose(Axis.YP.rotationDegrees(180));
         case EAST -> poseStack.mulPose(Axis.YP.rotationDegrees(270));
-        default -> { }
+        default -> {}
       }
     } else if (ceiling) {
       // Match square_ceiling_fixture.json: x/y rotations for all six faces.
       switch (state.getValue(IndustrialFixtureBlock.FACING)) {
-        case UP -> { }
+        case UP -> {}
         case DOWN -> poseStack.mulPose(Axis.XP.rotationDegrees(180));
         case NORTH -> poseStack.mulPose(Axis.XP.rotationDegrees(90));
         case SOUTH -> {
@@ -158,7 +200,7 @@ public final class LampFlickerRenderer implements BlockEntityRenderer<LampBaseBl
       }
     } else {
       switch (state.getValue(IndustrialFixtureBlock.FACING)) {
-        case UP -> { }
+        case UP -> {}
         case DOWN -> poseStack.mulPose(Axis.XP.rotationDegrees(180));
         case NORTH -> poseStack.mulPose(Axis.XP.rotationDegrees(90));
         case SOUTH -> poseStack.mulPose(Axis.XP.rotationDegrees(270));
@@ -173,8 +215,10 @@ public final class LampFlickerRenderer implements BlockEntityRenderer<LampBaseBl
       }
     }
     poseStack.translate(-0.5, -0.5, -0.5);
-    blockRenderer.getModelRenderer().renderModel(poseStack.last(), vertices, state, bulb,
-        1.0f, 1.0f, 1.0f, packedLight, packedOverlay);
+    blockRenderer
+        .getModelRenderer()
+        .renderModel(
+            poseStack.last(), vertices, state, bulb, 1.0f, 1.0f, 1.0f, packedLight, packedOverlay);
     poseStack.popPose();
   }
 }

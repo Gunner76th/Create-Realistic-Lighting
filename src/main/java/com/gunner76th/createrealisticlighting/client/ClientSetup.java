@@ -1,8 +1,5 @@
 package com.gunner76th.createrealisticlighting.client;
 
-
-import net.neoforged.neoforge.client.event.ModelEvent;
-import net.minecraft.client.resources.model.ModelResourceLocation;
 import com.gunner76th.createrealisticlighting.CreateRealisticLighting;
 import com.gunner76th.createrealisticlighting.block.IndustrialFixtureBlock;
 import com.gunner76th.createrealisticlighting.client.render.LampFlickerRenderer;
@@ -10,6 +7,7 @@ import com.gunner76th.createrealisticlighting.registry.ModBlockEntities;
 import com.gunner76th.createrealisticlighting.registry.ModItems;
 import com.gunner76th.createrealisticlighting.registry.ModMenus;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
@@ -19,6 +17,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 
 @EventBusSubscriber(
@@ -26,77 +25,75 @@ import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
     bus = EventBusSubscriber.Bus.MOD,
     value = Dist.CLIENT)
 public final class ClientSetup {
-    @SubscribeEvent
-    public static void registerFlickerModels(ModelEvent.RegisterAdditional event) {
-        String[] models = {
-            "industrial_fixture_gray_3_flicker_base",
-            "industrial_fixture_red_3_flicker_base",
-            "industrial_fixture_white_3_flicker_base",
-            "industrial_fixture_orange_3_flicker_base",
-            "industrial_fixture_magenta_3_flicker_base",
-            "industrial_fixture_light_blue_3_flicker_base",
-            "industrial_fixture_yellow_3_flicker_base",
-            "industrial_fixture_lime_3_flicker_base",
-            "industrial_fixture_pink_3_flicker_base",
-            "industrial_fixture_light_gray_3_flicker_base",
-            "industrial_fixture_cyan_3_flicker_base",
-            "industrial_fixture_purple_3_flicker_base",
-            "industrial_fixture_blue_3_flicker_base",
-            "industrial_fixture_brown_3_flicker_base",
-            "industrial_fixture_green_3_flicker_base",
-            "industrial_fixture_black_3_flicker_base",
-            "industrial_fixture_gray_3_flicker_bulb_lit",
-            "industrial_fixture_gray_3_flicker_bulb_off",
-            "square_ceiling_fixture_gray_3_flicker_base",
-            "square_ceiling_fixture_white_3_flicker_base",
-            "square_ceiling_fixture_orange_3_flicker_base",
-            "square_ceiling_fixture_magenta_3_flicker_base",
-            "square_ceiling_fixture_light_blue_3_flicker_base",
-            "square_ceiling_fixture_yellow_3_flicker_base",
-            "square_ceiling_fixture_lime_3_flicker_base",
-            "square_ceiling_fixture_pink_3_flicker_base",
-            "square_ceiling_fixture_light_gray_3_flicker_base",
-            "square_ceiling_fixture_cyan_3_flicker_base",
-            "square_ceiling_fixture_purple_3_flicker_base",
-            "square_ceiling_fixture_blue_3_flicker_base",
-            "square_ceiling_fixture_brown_3_flicker_base",
-            "square_ceiling_fixture_green_3_flicker_base",
-            "square_ceiling_fixture_red_3_flicker_base",
-            "square_ceiling_fixture_black_3_flicker_base",
+  @SubscribeEvent
+  public static void registerFlickerModels(ModelEvent.RegisterAdditional event) {
+    String[] models = {
+      "industrial_fixture_gray_2_flicker_base",
+      "industrial_fixture_gray_2_flicker_bulb_lit",
+      "industrial_fixture_gray_2_flicker_bulb_off",
+      "industrial_fixture_gray_3_flicker_base",
+      "industrial_fixture_red_3_flicker_base",
+      "industrial_fixture_white_3_flicker_base",
+      "industrial_fixture_orange_3_flicker_base",
+      "industrial_fixture_magenta_3_flicker_base",
+      "industrial_fixture_light_blue_3_flicker_base",
+      "industrial_fixture_yellow_3_flicker_base",
+      "industrial_fixture_lime_3_flicker_base",
+      "industrial_fixture_pink_3_flicker_base",
+      "industrial_fixture_light_gray_3_flicker_base",
+      "industrial_fixture_cyan_3_flicker_base",
+      "industrial_fixture_purple_3_flicker_base",
+      "industrial_fixture_blue_3_flicker_base",
+      "industrial_fixture_brown_3_flicker_base",
+      "industrial_fixture_green_3_flicker_base",
+      "industrial_fixture_black_3_flicker_base",
+      "industrial_fixture_gray_3_flicker_bulb_lit",
+      "industrial_fixture_gray_3_flicker_bulb_off",
+      "square_ceiling_fixture_gray_3_flicker_base",
+      "square_ceiling_fixture_white_3_flicker_base",
+      "square_ceiling_fixture_orange_3_flicker_base",
+      "square_ceiling_fixture_magenta_3_flicker_base",
+      "square_ceiling_fixture_light_blue_3_flicker_base",
+      "square_ceiling_fixture_yellow_3_flicker_base",
+      "square_ceiling_fixture_lime_3_flicker_base",
+      "square_ceiling_fixture_pink_3_flicker_base",
+      "square_ceiling_fixture_light_gray_3_flicker_base",
+      "square_ceiling_fixture_cyan_3_flicker_base",
+      "square_ceiling_fixture_purple_3_flicker_base",
+      "square_ceiling_fixture_blue_3_flicker_base",
+      "square_ceiling_fixture_brown_3_flicker_base",
+      "square_ceiling_fixture_green_3_flicker_base",
+      "square_ceiling_fixture_red_3_flicker_base",
+      "square_ceiling_fixture_black_3_flicker_base",
+      "square_ceiling_fixture_gray_3_flicker_diffuser_lit",
+      "square_ceiling_fixture_gray_3_flicker_diffuser_off",
+      "wall_sconce_gray_3_flicker_base",
+      "wall_sconce_white_3_flicker_base",
+      "wall_sconce_orange_3_flicker_base",
+      "wall_sconce_magenta_3_flicker_base",
+      "wall_sconce_light_blue_3_flicker_base",
+      "wall_sconce_yellow_3_flicker_base",
+      "wall_sconce_lime_3_flicker_base",
+      "wall_sconce_pink_3_flicker_base",
+      "wall_sconce_light_gray_3_flicker_base",
+      "wall_sconce_cyan_3_flicker_base",
+      "wall_sconce_purple_3_flicker_base",
+      "wall_sconce_blue_3_flicker_base",
+      "wall_sconce_brown_3_flicker_base",
+      "wall_sconce_green_3_flicker_base",
+      "wall_sconce_red_3_flicker_base",
+      "wall_sconce_black_3_flicker_base",
+      "wall_sconce_gray_3_flicker_bulb_lit",
+      "wall_sconce_gray_3_flicker_bulb_off"
+    };
 
-            "square_ceiling_fixture_gray_3_flicker_diffuser_lit",
-            "square_ceiling_fixture_gray_3_flicker_diffuser_off",
-            "wall_sconce_gray_3_flicker_base",
-            "wall_sconce_white_3_flicker_base",
-            "wall_sconce_orange_3_flicker_base",
-            "wall_sconce_magenta_3_flicker_base",
-            "wall_sconce_light_blue_3_flicker_base",
-            "wall_sconce_yellow_3_flicker_base",
-            "wall_sconce_lime_3_flicker_base",
-            "wall_sconce_pink_3_flicker_base",
-            "wall_sconce_light_gray_3_flicker_base",
-            "wall_sconce_cyan_3_flicker_base",
-            "wall_sconce_purple_3_flicker_base",
-            "wall_sconce_blue_3_flicker_base",
-            "wall_sconce_brown_3_flicker_base",
-            "wall_sconce_green_3_flicker_base",
-            "wall_sconce_red_3_flicker_base",
-            "wall_sconce_black_3_flicker_base",
+    for (String model : models) {
+      ResourceLocation id =
+          ResourceLocation.fromNamespaceAndPath("create_realistic_lighting", "block/" + model);
 
-            "wall_sconce_gray_3_flicker_bulb_lit",
-            "wall_sconce_gray_3_flicker_bulb_off"
-        };
-
-        for (String model : models) {
-            ResourceLocation id = ResourceLocation.fromNamespaceAndPath(
-                "create_realistic_lighting",
-                "block/" + model
-            );
-
-            event.register(ModelResourceLocation.standalone(id));
-        }
+      event.register(ModelResourceLocation.standalone(id));
     }
-
+  }
 
   private ClientSetup() {}
 
