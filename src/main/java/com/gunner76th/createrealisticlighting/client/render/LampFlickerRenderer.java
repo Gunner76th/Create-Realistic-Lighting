@@ -142,7 +142,7 @@ public final class LampFlickerRenderer implements BlockEntityRenderer<LampBaseBl
     // LED flickering works on all fixture types and colors.
     // Fluorescent flickering works on all industrial fixture colors.
     boolean led = bulbKind == 3;
-    boolean fluorescent = bulbKind == 2 && (industrial || ceiling);
+    boolean fluorescent = bulbKind == 2 && (industrial || ceiling || sconce);
 
     if ((!industrial && !ceiling && !sconce)
         || (!led && !fluorescent)
@@ -160,6 +160,14 @@ public final class LampFlickerRenderer implements BlockEntityRenderer<LampBaseBl
               ResourceLocation.fromNamespaceAndPath(
                   "create_realistic_lighting",
                   "block/square_ceiling_fixture_" + color + "_2_flicker_" + part));
+    } else if (fluorescent && sconce) {
+      String color = state.getValue(IndustrialFixtureBlock.COLOR).getName();
+      String part = lit ? "bulb_lit" : "bulb_off";
+      modelId =
+          ModelResourceLocation.standalone(
+              ResourceLocation.fromNamespaceAndPath(
+                  "create_realistic_lighting",
+                  "block/wall_sconce_" + color + "_2_flicker_" + part));
     } else if (fluorescent) {
       String color = state.getValue(IndustrialFixtureBlock.COLOR).getName();
       String part = lit ? "bulb_lit" : "bulb_off";
