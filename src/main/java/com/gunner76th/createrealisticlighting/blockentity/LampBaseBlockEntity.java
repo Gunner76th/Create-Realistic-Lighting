@@ -6,12 +6,9 @@ import com.gunner76th.createrealisticlighting.logic.LedExtendedLighting;
 import com.gunner76th.createrealisticlighting.menu.LampMenu;
 import com.gunner76th.createrealisticlighting.registry.ModBlockEntities;
 import com.gunner76th.createrealisticlighting.registry.ModItems;
+import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import java.util.HashSet;
 import java.util.List;
-import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
-import org.patryk3211.powergrid.electricity.base.ElectricBlockEntity;
-import org.patryk3211.powergrid.electricity.base.IElectricEntity.CircuitBuilder;
-import org.patryk3211.powergrid.electricity.sim.SwitchedWire;
 import java.util.Set;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -27,8 +24,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import org.patryk3211.powergrid.electricity.base.ElectricBlockEntity;
+import org.patryk3211.powergrid.electricity.base.IElectricEntity.CircuitBuilder;
+import org.patryk3211.powergrid.electricity.sim.SwitchedWire;
 
 public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProvider {
   // 0 = On, 1 = Off, 2 = Redstone
@@ -55,15 +54,25 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
   }
 
   // Electrical readings are sampled from the Power Grid circuit, not stored FE.
-  public int getVoltageTenths() { return (int) Math.round(Math.min(32767, voltage * 10)); }
-  public int getPowerTenths() { return (int) Math.round(Math.min(32767, powerWatts * 10)); }
-  public int getCurrentMilliamps() { return (int) Math.round(Math.min(32767, currentAmps * 1000)); }
-
-  public long getAgeTicks() {
-    return ageTicks;
+  public int getVoltageTenths() {
+    return (int) Math.round(Math.min(32767, voltage * 10));
   }
 
-  public int getEnergyCost() { return (int) Math.round(nominalPower()); }
+  public int getPowerTenths() {
+    return (int) Math.round(Math.min(32767, powerWatts * 10));
+  }
+
+  public int getCurrentMilliamps() {
+    return (int) Math.round(Math.min(32767, currentAmps * 1000));
+  }
+
+  public double getAccumulatedWear() {
+    return accumulatedWear;
+  }
+
+  public int getEnergyCost() {
+    return (int) Math.round(nominalPower());
+  }
 
   public long getLifespanTicks() {
     return lifespan();
@@ -80,13 +89,58 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
   }
 
   private ItemStack bulb = ItemStack.EMPTY;
-  private long ageTicks = 0;
+  private double accumulatedWear = 0.0;
   private transient SwitchedWire loadWire;
   private double voltage;
   private double currentAmps;
   private double powerWatts;
-  private static final double MINIMUM_VOLTAGE = 90.0;
+
+  // Voltage received from the server for client-side visual effects only.
+  private double clientVisualVoltage = 0.0;
+
+  // Server-authoritative nominal voltage for client-side rendering.
+  // Defaults to 120 V until the first synchronization packet arrives.
+  private double clientNominalVoltage = 120.0;
+
+  public double getClientVisualVoltage() {
+    return clientVisualVoltage;
+  }
+
+  public double getClientNominalVoltage() {
+    return clientNominalVoltage;
+  }
+
+  // Tracks the last visual flicker voltage band sent to clients.
+  private int lastSyncedFlickerBand = -1;
+
+  // Limit visual voltage synchronization to once every 5 game ticks.
+  private long lastFlickerSyncTick = Long.MIN_VALUE;
+
+  private int getFlickerBand() {
+    double operatingVoltage = normalizedVoltage();
+    if (operatingVoltage < 100.0) return 0;
+    if (operatingVoltage < 106.0) return 1;
+    if (operatingVoltage < 111.0) return 2;
+    if (operatingVoltage < 115.0) return 3;
+    return 4;
+  }
+
+  private static final double MINIMUM_VOLTAGE = 60.0;
+  private static final double SHUTDOWN_VOLTAGE = 100.0;
+  private static final double RECOVERY_VOLTAGE = 105.0;
   private static final double NOMINAL_VOLTAGE = 120.0;
+
+  /**
+   * Converts measured voltage to its equivalent on the original
+   * 120 V operating scale.
+   *
+   * This preserves Alpha 4 voltage behavior at any configured
+   * nominal voltage between 60 V and 480 V.
+   */
+  private double normalizedVoltage() {
+    return voltage * NOMINAL_VOLTAGE
+        / com.gunner76th.createrealisticlighting.config.EnergyConfig.nominalVoltage();
+  }
 
   private double nominalPower() {
     // Power Grid may call buildCircuit() from the superclass constructor,
@@ -101,13 +155,14 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
 
   private boolean canDrawPower() {
     // Safe during superclass construction and while the fixture has no bulb.
-    return bulb != null && enabled() && !bulb.isEmpty() && ageTicks < lifespan();
+    return bulb != null && enabled() && !bulb.isEmpty() && accumulatedWear < lifespan();
   }
 
   private void updateLoad() {
     if (loadWire == null) return;
     double watts = nominalPower();
-    loadWire.setResistance(watts > 0 ? NOMINAL_VOLTAGE * NOMINAL_VOLTAGE / watts : 1_000_000);
+    double nominalVoltage = com.gunner76th.createrealisticlighting.config.EnergyConfig.nominalVoltage();
+    loadWire.setResistance(watts > 0 ? nominalVoltage * nominalVoltage / watts : 1_000_000);
     loadWire.setState(canDrawPower() && watts > 0);
   }
 
@@ -119,7 +174,8 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
     builder.setTerminalCount(4);
     builder.connect(0.001f, builder.terminalNode(0), builder.terminalNode(2));
     builder.connect(0.001f, builder.terminalNode(1), builder.terminalNode(3));
-    loadWire = builder.connectSwitch(240.0f, builder.terminalNode(0), builder.terminalNode(1), false);
+    loadWire =
+        builder.connectSwitch(240.0f, builder.terminalNode(0), builder.terminalNode(1), false);
     updateLoad();
   }
 
@@ -137,7 +193,10 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
     runLightingTick();
   }
 
+  private boolean voltageEligible = false;
   private boolean lastLit;
+  // Electrical simulation may run multiple times per Minecraft game tick.
+  private long lastWearGameTick = Long.MIN_VALUE;
   private final Set<BlockPos> ledNodes = new HashSet<>();
 
   /** Reconcile periodically to handle changed obstacles and node replacement. */
@@ -169,8 +228,8 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
   public boolean isExtendedLedActive() {
     return enabled()
         && bulb.is(ModItems.LED_BULB.get())
-        && ageTicks < lifespan()
-        && voltage >= MINIMUM_VOLTAGE;
+        && accumulatedWear < lifespan()
+        && isVoltageEligible();
   }
 
   public LampBaseBlockEntity(BlockPos pos, BlockState state) {
@@ -181,17 +240,17 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
     return bulb;
   }
 
-  private static final String BULB_AGE_KEY = "RealisticLightingAgeTicks";
+  private static final String BULB_WEAR_KEY = "RealisticLightingAccumulatedWear";
 
   public void setBulb(ItemStack stack) {
     bulb = stack.copyWithCount(1);
 
     if (bulb.isEmpty()) {
-      ageTicks = 0;
+      accumulatedWear = 0.0;
     } else {
       CustomData data = bulb.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
 
-      ageTicks = Mth.clamp(data.copyTag().getLong(BULB_AGE_KEY), 0L, lifespan());
+      accumulatedWear = sanitizeWear(data.copyTag().getDouble(BULB_WEAR_KEY), lifespan());
     }
 
     updateLitState();
@@ -206,7 +265,7 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
       CompoundTag data =
           result.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
 
-      data.putLong(BULB_AGE_KEY, ageTicks);
+      data.putDouble(BULB_WEAR_KEY, accumulatedWear);
 
       result.set(DataComponents.CUSTOM_DATA, CustomData.of(data));
     }
@@ -218,13 +277,19 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
     ItemStack result = getBulbDrop();
 
     bulb = ItemStack.EMPTY;
-    ageTicks = 0;
+    accumulatedWear = 0.0;
 
     updateLitState();
     setChanged();
     sync();
 
     return result;
+  }
+
+  // Reject invalid NBT values and keep wear within the bulb's rated lifespan.
+  private static double sanitizeWear(double wear, long ratedLifespan) {
+    if (!Double.isFinite(wear)) return 0.0;
+    return Mth.clamp(wear, 0.0, (double) ratedLifespan);
   }
 
   private long lifespan() {
@@ -235,21 +300,151 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
     return 0;
   }
 
+  private double instantBurnoutVoltage() {
+    if (bulb.is(ModItems.INCANDESCENT_BULB.get())) return 180.0;
+    if (bulb.is(ModItems.FLUORESCENT_BULB.get())) return 160.0;
+    if (bulb.is(ModItems.LED_BULB.get())) return 150.0;
+    if (bulb.is(ModItems.GROW_BULB.get())) return 160.0;
+    return Double.POSITIVE_INFINITY;
+  }
+
+  // Piecewise-linear overvoltage wear, using the approved Alpha 3 balance points.
+  // Instant burnout is handled separately before wear is accumulated.
+  private double overvoltageWearMultiplier() {
+    double operatingVoltage = normalizedVoltage();
+    if (operatingVoltage <= 125.0) return 1.0;
+    final double[] volts;
+    final double[] multipliers;
+    if (bulb.is(ModItems.INCANDESCENT_BULB.get())) {
+      volts = new double[] {125, 130, 140, 150, 160, 180};
+      multipliers = new double[] {1, 1.5, 2.5, 4, 6, 6};
+    } else if (bulb.is(ModItems.FLUORESCENT_BULB.get()) || bulb.is(ModItems.GROW_BULB.get())) {
+      volts = new double[] {125, 130, 140, 150, 160};
+      multipliers = new double[] {1, 2, 4, 8, 8};
+    } else if (bulb.is(ModItems.LED_BULB.get())) {
+      volts = new double[] {125, 130, 140, 150};
+      multipliers = new double[] {1, 2.5, 6, 6};
+    } else {
+      return 1.0;
+    }
+    for (int i = 1; i < volts.length; i++) {
+      if (operatingVoltage < volts[i]) {
+        double fraction = (operatingVoltage - volts[i - 1]) / (volts[i] - volts[i - 1]);
+        return multipliers[i - 1] + fraction * (multipliers[i] - multipliers[i - 1]);
+      }
+    }
+    return multipliers[multipliers.length - 1];
+  }
+
+  // Incandescent filaments age more slowly when operated below 115 V.
+  // Preserve a small nonzero wear rate while illuminated.
+  private double incandescentUndervoltageWearMultiplier() {
+    double operatingVoltage = normalizedVoltage();
+    if (!bulb.is(ModItems.INCANDESCENT_BULB.get()) || operatingVoltage >= 115.0) return 1.0;
+    return Math.max(0.05, Math.pow(Math.max(0.0, operatingVoltage) / 115.0, 12.0));
+  }
+
+  // LED driver electronics accumulate extra wear under nominal voltage.
+  // Linear interpolation follows the approved Alpha 3 undervoltage balance points.
+  private double ledUndervoltageWearMultiplier() {
+    double operatingVoltage = normalizedVoltage();
+    if (!bulb.is(ModItems.LED_BULB.get()) || operatingVoltage >= 120.0) return 1.0;
+    final double[] volts = {100.0, 105.0, 110.0, 115.0, 120.0};
+    final double[] multipliers = {2.5, 2.0, 1.5, 1.2, 1.0};
+    if (operatingVoltage <= volts[0]) return multipliers[0];
+    for (int i = 1; i < volts.length; i++) {
+      if (operatingVoltage <= volts[i]) {
+        double fraction = (operatingVoltage - volts[i - 1]) / (volts[i] - volts[i - 1]);
+        return multipliers[i - 1] + fraction * (multipliers[i] - multipliers[i - 1]);
+      }
+    }
+    return 1.0;
+  }
+
+  private double voltageWearMultiplier() {
+    return overvoltageWearMultiplier()
+        * incandescentUndervoltageWearMultiplier()
+        * ledUndervoltageWearMultiplier();
+  }
+
+  private boolean isVoltageEligible() {
+    return bulb.is(ModItems.INCANDESCENT_BULB.get()) ? normalizedVoltage() + MINIMUM_VOLTAGE * 0.0001 >= MINIMUM_VOLTAGE : voltageEligible;
+  }
+
+  private boolean hasSufficientVoltage() {
+    if (bulb.is(ModItems.INCANDESCENT_BULB.get())) {
+      return normalizedVoltage() + MINIMUM_VOLTAGE * 0.0001 >= MINIMUM_VOLTAGE;
+    }
+
+    double operatingVoltage = normalizedVoltage();
+
+    if (operatingVoltage < SHUTDOWN_VOLTAGE) {
+      voltageEligible = false;
+    } else if (operatingVoltage >= RECOVERY_VOLTAGE) {
+      voltageEligible = true;
+    }
+
+    return voltageEligible;
+  }
+
+  private int desiredLightLevel(boolean lit) {
+    if (!lit) return 0;
+    if (!bulb.is(ModItems.INCANDESCENT_BULB.get())) return 15;
+    double normalized =
+        Mth.clamp((normalizedVoltage() - MINIMUM_VOLTAGE) / (NOMINAL_VOLTAGE - MINIMUM_VOLTAGE), 0.0, 1.0);
+    return Mth.clamp((int) Math.round(1.0 + 14.0 * Math.pow(normalized, 1.5)), 1, 15);
+  }
+
   private void runLightingTick() {
     if (level == null || level.isClientSide) return;
-    boolean lit = canDrawPower() && voltage >= MINIMUM_VOLTAGE;
-    if (lit) {
-      ageTicks++;
-      if (bulb.is(ModItems.GROW_BULB.get()) && level.getGameTime() % 20 == 0)
-        com.gunner76th.createrealisticlighting.logic.GrowLampGrowth.apply(level, worldPosition);
+
+    // Synchronize visual voltage changes without flooding clients.
+    int currentFlickerBand = getFlickerBand();
+    long currentGameTick = level.getGameTime();
+
+    if (currentFlickerBand != lastSyncedFlickerBand
+        && (lastFlickerSyncTick == Long.MIN_VALUE || currentGameTick - lastFlickerSyncTick >= 5)) {
+
+      lastSyncedFlickerBand = currentFlickerBand;
+      lastFlickerSyncTick = currentGameTick;
+      sync();
     }
-    if (lastLit != lit) {
+
+    boolean sufficientVoltage = hasSufficientVoltage();
+    if (canDrawPower() && normalizedVoltage() >= instantBurnoutVoltage()) {
+      accumulatedWear = lifespan();
+      updateLoad();
+    }
+
+    boolean lit = canDrawPower() && sufficientVoltage;
+
+    long gameTick = level.getGameTime();
+
+    if (lastWearGameTick != gameTick) {
+      lastWearGameTick = gameTick;
+
+      if (lit) {
+        accumulatedWear = Math.min((double) lifespan(), accumulatedWear + voltageWearMultiplier());
+
+        if (bulb.is(ModItems.GROW_BULB.get()) && gameTick % 20 == 0)
+          com.gunner76th.createrealisticlighting.logic.GrowLampGrowth.apply(level, worldPosition);
+      }
+    }
+
+    int desiredLightLevel = desiredLightLevel(lit);
+
+    if (lastLit != lit
+        || getBlockState().getValue(LampBaseBlock.LIGHT_LEVEL) != desiredLightLevel) {
+
       lastLit = lit;
       updateLitState();
       sync();
     }
-    if (level.getGameTime() % 40 == 0)
+
+    if (Math.floorMod(level.getGameTime() + worldPosition.asLong(), 40L) == 0L) {
       updateLedNodes(lit && bulb.is(ModItems.LED_BULB.get()));
+    }
+
     if (lit || level.getGameTime() % 100 == 0) setChanged();
   }
 
@@ -262,10 +457,7 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
   private void updateLitState() {
     if (level == null || level.isClientSide) return;
     boolean shouldLight =
-        enabled()
-            && !bulb.isEmpty()
-            && ageTicks < lifespan()
-            && voltage >= MINIMUM_VOLTAGE;
+        enabled() && !bulb.isEmpty() && accumulatedWear < lifespan() && isVoltageEligible();
     BlockState current = getBlockState();
     if (current.hasProperty(IndustrialFixtureBlock.BULB_KIND)) {
       int kind =
@@ -281,9 +473,17 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
         level.setBlock(worldPosition, current, 3);
       }
     }
+    int lightLevel = desiredLightLevel(shouldLight);
     if (current.hasProperty(LampBaseBlock.LIT)
-        && current.getValue(LampBaseBlock.LIT) != shouldLight)
-      level.setBlock(worldPosition, current.setValue(LampBaseBlock.LIT, shouldLight), 3);
+        && (current.getValue(LampBaseBlock.LIT) != shouldLight
+            || current.getValue(LampBaseBlock.LIGHT_LEVEL) != lightLevel)) {
+      level.setBlock(
+          worldPosition,
+          current
+              .setValue(LampBaseBlock.LIT, shouldLight)
+              .setValue(LampBaseBlock.LIGHT_LEVEL, lightLevel),
+          3);
+    }
     lastLit = shouldLight;
     updateLedNodes(shouldLight && bulb.is(ModItems.LED_BULB.get()));
   }
@@ -297,11 +497,20 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
   protected void write(CompoundTag tag, HolderLookup.Provider registries, boolean clientPacket) {
     super.write(tag, registries, clientPacket);
 
+    // Send voltage to clients for visual bulb flickering.
+    // This does not change world lighting or electrical simulation.
+    if (clientPacket) {
+      tag.putDouble("ClientVisualVoltage", voltage);
+      tag.putDouble(
+          "ClientNominalVoltage",
+          com.gunner76th.createrealisticlighting.config.EnergyConfig.nominalVoltage());
+    }
+
     if (!bulb.isEmpty()) {
       tag.put("Bulb", bulb.save(registries));
     }
 
-    tag.putLong("AgeTicks", ageTicks);
+    tag.putDouble("AccumulatedWear", accumulatedWear);
     tag.putInt("OperatingMode", operatingMode);
 
     long[] nodes = ledNodes.stream().mapToLong(BlockPos::asLong).toArray();
@@ -313,12 +522,26 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
   protected void read(CompoundTag tag, HolderLookup.Provider registries, boolean clientPacket) {
     super.read(tag, registries, clientPacket);
 
+    // Receive voltage for client-side rendering only.
+    if (clientPacket && tag.contains("ClientVisualVoltage", Tag.TAG_DOUBLE)) {
+      clientVisualVoltage = tag.getDouble("ClientVisualVoltage");
+    }
+
+    if (clientPacket && tag.contains("ClientNominalVoltage", Tag.TAG_DOUBLE)) {
+      double receivedNominalVoltage = tag.getDouble("ClientNominalVoltage");
+
+      if (Double.isFinite(receivedNominalVoltage)
+          && receivedNominalVoltage >= 60.0
+          && receivedNominalVoltage <= 480.0) {
+        clientNominalVoltage = receivedNominalVoltage;
+      }
+    }
     bulb =
         tag.contains("Bulb", Tag.TAG_COMPOUND)
             ? ItemStack.parseOptional(registries, tag.getCompound("Bulb"))
             : ItemStack.EMPTY;
 
-    ageTicks = tag.getLong("AgeTicks");
+    accumulatedWear = sanitizeWear(tag.getDouble("AccumulatedWear"), lifespan());
 
     operatingMode = Math.max(0, Math.min(2, tag.getInt("OperatingMode")));
 
@@ -333,7 +556,7 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
 
   @Override
   public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
-    return saveWithoutMetadata(registries);
+    return writeClient(new CompoundTag(), registries);
   }
 
   @Override

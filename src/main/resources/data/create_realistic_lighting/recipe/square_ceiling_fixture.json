@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "III",
+    "GWG",
+    " A "
+  ],
+  "key": {
+    "I": {
+      "item": "create:iron_sheet"
+    },
+    "G": {
+      "item": "minecraft:white_stained_glass_pane"
+    },
+    "W": {
+      "item": "powergrid:wire"
+    },
+    "A": {
+      "item": "create:andesite_alloy"
+    }
+  },
+  "result": {
+    "id": "create_realistic_lighting:square_ceiling_fixture",
+    "count": 2
+  }
+}

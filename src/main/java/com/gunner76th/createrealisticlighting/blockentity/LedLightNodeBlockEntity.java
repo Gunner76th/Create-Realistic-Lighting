@@ -19,7 +19,7 @@ public class LedLightNodeBlockEntity extends BlockEntity {
     public LedLightNodeBlockEntity(BlockPos pos, BlockState state) { super(ModBlockEntities.LED_LIGHT_NODE.get(), pos, state); }
     /** Prune abandoned owners after fixture removal, including when chunks load in a different order. */
     public static void serverTick(Level level, BlockPos pos, BlockState state, LedLightNodeBlockEntity node) {
-        if (level.getGameTime() % 100 != 0) return;
+        if (Math.floorMod(level.getGameTime() + pos.asLong(), 100L) != 0L) return;
         for (long packed : new java.util.HashSet<>(node.owners.keySet())) {
             BlockPos fixture = BlockPos.of(packed);
             if (!level.hasChunkAt(fixture)) continue;
@@ -30,7 +30,8 @@ public class LedLightNodeBlockEntity extends BlockEntity {
         }
     }
     public void addOwner(BlockPos fixture, int light) {
-        owners.put(fixture.asLong(), light);
+        Integer previous = owners.put(fixture.asLong(), light);
+        if (previous != null && previous == light) return;
         refresh();
     }
     public void removeOwner(BlockPos fixture) {

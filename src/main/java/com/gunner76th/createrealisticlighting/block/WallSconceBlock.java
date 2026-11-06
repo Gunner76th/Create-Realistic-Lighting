@@ -40,9 +40,9 @@ public class WallSconceBlock extends IndustrialFixtureBlock {
     double z1 = 0.0, z2 = 3.0;
     double a, b, c, d;
     switch (state.getValue(FACING)) {
-      case WEST -> { a = z1; b = 16.0 - x2; c = z2; d = 16.0 - x1; }
+      case WEST -> { a = 16.0 - z2; b = x1; c = 16.0 - z1; d = x2; }
       case NORTH -> { a = 16.0 - x2; b = 16.0 - z2; c = 16.0 - x1; d = 16.0 - z1; }
-      case EAST -> { a = 16.0 - z2; b = x1; c = 16.0 - z1; d = x2; }
+      case EAST -> { a = z1; b = 16.0 - x2; c = z2; d = 16.0 - x1; }
       default -> { a = x1; b = z1; c = x2; d = z2; }
     }
     int color = (index == 0 || index == 2)

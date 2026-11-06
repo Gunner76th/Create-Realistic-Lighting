@@ -1,7 +1,7 @@
 
 package com.gunner76th.createrealisticlighting.registry;
 
-import com.gunner76th.createrealisticlighting.RealisticLighting;
+import com.gunner76th.createrealisticlighting.CreateRealisticLighting;
 import com.gunner76th.createrealisticlighting.blockentity.LampBaseBlockEntity;
 import com.gunner76th.createrealisticlighting.blockentity.LedLightNodeBlockEntity;
 
@@ -18,7 +18,7 @@ public final class ModBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
             DeferredRegister.create(
                     Registries.BLOCK_ENTITY_TYPE,
-                    RealisticLighting.MOD_ID
+                    CreateRealisticLighting.MOD_ID
             );
 
     public static final DeferredHolder<

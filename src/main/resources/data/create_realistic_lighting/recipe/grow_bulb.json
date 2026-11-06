@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GBG",
+    "WNW",
+    " A "
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glass_pane"
+    },
+    "B": {
+      "item": "minecraft:glow_berries"
+    },
+    "W": {
+      "item": "powergrid:wire"
+    },
+    "N": {
+      "item": "powergrid:neon_bulb"
+    },
+    "A": {
+      "item": "create:andesite_alloy"
+    }
+  },
+  "result": {
+    "id": "create_realistic_lighting:grow_bulb",
+    "count": 1
+  }
+}

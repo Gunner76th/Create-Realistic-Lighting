@@ -24,7 +24,12 @@ versionRange="[1.21.1,1.21.2)"
 ordering="NONE"
 side="BOTH"
 
-
+[[dependencies.${mod_id}]]
+modId="create"
+type="required"
+versionRange="[6.0.10,)"
+ordering="AFTER"
+side="BOTH"
 
 [[dependencies.${mod_id}]]
 modId="powergrid"
