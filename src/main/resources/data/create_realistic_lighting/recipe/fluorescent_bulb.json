@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "WNW",
+    " A "
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glass_pane"
+    },
+    "W": {
+      "item": "powergrid:wire"
+    },
+    "N": {
+      "item": "powergrid:neon_bulb"
+    },
+    "A": {
+      "item": "create:andesite_alloy"
+    }
+  },
+  "result": {
+    "id": "create_realistic_lighting:fluorescent_bulb",
+    "count": 1
+  }
+}

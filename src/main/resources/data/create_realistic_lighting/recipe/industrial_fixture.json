@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BIB",
+    "IWI",
+    " A "
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:iron_bars"
+    },
+    "I": {
+      "item": "create:iron_sheet"
+    },
+    "W": {
+      "item": "powergrid:wire"
+    },
+    "A": {
+      "item": "create:andesite_alloy"
+    }
+  },
+  "result": {
+    "id": "create_realistic_lighting:industrial_fixture",
+    "count": 2
+  }
+}
