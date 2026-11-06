@@ -28,13 +28,14 @@ public final class LedExtendedLighting {
         Set<BlockPos> result = new HashSet<>();
         if (!fixtureState.hasProperty(IndustrialFixtureBlock.FACING)) return result;
         Direction facing = fixtureState.getValue(IndustrialFixtureBlock.FACING);
+        Vec3 from = rayOrigin(fixture, facing);
 
         // Surface-aware samples: a fine, origin-centered lattice above exposed floors.
         // Reject any point outside the spherical range or hidden behind an obstruction.
         for (int dx = -MAX_RADIUS; dx <= MAX_RADIUS; dx += SURFACE_STEP) {
             for (int dz = -MAX_RADIUS; dz <= MAX_RADIUS; dz += SURFACE_STEP) {
                 if (dx * dx + dz * dz > MAX_RADIUS * MAX_RADIUS) continue;
-                BlockPos surfaceAir = findVisibleSurfaceAir(level, fixture, dx, dz, facing);
+                BlockPos surfaceAir = findVisibleSurfaceAir(level, fixture, dx, dz, from);
                 if (surfaceAir != null && withinRadius(fixture, surfaceAir)) {
                     result.add(surfaceAir.immutable());
                 }
@@ -48,7 +49,7 @@ public final class LedExtendedLighting {
                 for (int dz = -MAX_RADIUS; dz <= MAX_RADIUS; dz += VOLUME_STEP) {
                     BlockPos target = fixture.offset(dx, dy, dz);
                     if (target.equals(fixture) || !withinRadius(fixture, target)) continue;
-                    if (canPlaceNode(level, target) && clearRay(level, fixture, target, facing)) {
+                    if (canPlaceNode(level, target) && clearRay(level, from, target)) {
                         result.add(target.immutable());
                     }
                 }
@@ -58,7 +59,7 @@ public final class LedExtendedLighting {
     }
 
     private static BlockPos findVisibleSurfaceAir(Level level, BlockPos fixture,
-                                                   int dx, int dz, Direction facing) {
+                                                   int dx, int dz, Vec3 from) {
         int x = fixture.getX() + dx;
         int z = fixture.getZ() + dz;
         // Check the fixture's own elevation first, then descend to find a floor.
@@ -71,7 +72,7 @@ public final class LedExtendedLighting {
             if (!canPlaceNode(level, above)) continue;
             // Do not search through a roof for a lower floor when the first viable
             // surface is blocked from the bulb.
-            return clearRay(level, fixture, above, facing) ? above : null;
+            return clearRay(level, from, above) ? above : null;
         }
         return null;
     }
@@ -86,12 +87,16 @@ public final class LedExtendedLighting {
         return state.isAir() || state.is(ModBlocks.LED_LIGHT_NODE.get());
     }
 
-    private static boolean clearRay(Level level, BlockPos fixture,
-                                    BlockPos target, Direction facing) {
-        Vec3 from = Vec3.atCenterOf(fixture).add(
+    private static Vec3 rayOrigin(BlockPos fixture, Direction facing) {
+        return Vec3.atCenterOf(fixture).add(
                 facing.getStepX() * 0.65,
                 facing.getStepY() * 0.65,
                 facing.getStepZ() * 0.65);
+    }
+
+    private static boolean clearRay(Level level, Vec3 from,
+                                    BlockPos target) {
+
         Vec3 to = Vec3.atCenterOf(target);
         BlockHitResult hit = level.clip(new ClipContext(from, to,
                 ClipContext.Block.COLLIDER,
@@ -114,15 +119,15 @@ public final class LedExtendedLighting {
      * horizontal sample points are hidden from the fixture.
      */
     private static int shadowAdjustedStrength(Level level, BlockPos fixture,
-                                              BlockPos node, BlockState fixtureState) {
+                                              BlockPos node, BlockState fixtureState,
+                                              Vec3 from) {
         int base = strength(fixture, node, fixtureState);
-        if (base <= 2 || !fixtureState.hasProperty(IndustrialFixtureBlock.FACING)) return base;
-        Direction facing = fixtureState.getValue(IndustrialFixtureBlock.FACING);
+        if (base <= 2 || from == null) return base;
         int occluded = 0;
         for (Direction direction : Direction.Plane.HORIZONTAL) {
             BlockPos sample = node.relative(direction, 2);
             if (!level.isInWorldBounds(sample) || !level.hasChunkAt(sample)) continue;
-            if (!clearRay(level, fixture, sample, facing)) occluded++;
+            if (!clearRay(level, from, sample)) occluded++;
         }
         // Do not penalize a node for a single blocked probe (e.g. one pillar).
         // Keep the adjustment small to protect the smooth illuminated side.
@@ -140,12 +145,16 @@ public final class LedExtendedLighting {
 
     public static void add(Level level, BlockPos fixture, BlockState fixtureState,
                            Set<BlockPos> positions) {
+        Vec3 from = fixtureState.hasProperty(IndustrialFixtureBlock.FACING)
+                ? rayOrigin(fixture, fixtureState.getValue(IndustrialFixtureBlock.FACING))
+                : null;
+
         for (BlockPos p : positions) {
             if (!level.hasChunkAt(p)) continue;
             BlockState at = level.getBlockState(p);
             if (at.isAir()) level.setBlock(p, ModBlocks.LED_LIGHT_NODE.get().defaultBlockState(), 3);
             if (level.getBlockEntity(p) instanceof LedLightNodeBlockEntity node)
-                node.addOwner(fixture, shadowAdjustedStrength(level, fixture, p, fixtureState));
+                node.addOwner(fixture, shadowAdjustedStrength(level, fixture, p, fixtureState, from));
         }
     }
 }

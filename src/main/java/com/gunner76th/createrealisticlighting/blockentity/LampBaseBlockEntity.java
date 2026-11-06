@@ -441,7 +441,9 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
       sync();
     }
 
-    if (level.getGameTime() % 40 == 0) updateLedNodes(lit && bulb.is(ModItems.LED_BULB.get()));
+    if (Math.floorMod(level.getGameTime() + worldPosition.asLong(), 40L) == 0L) {
+      updateLedNodes(lit && bulb.is(ModItems.LED_BULB.get()));
+    }
 
     if (lit || level.getGameTime() % 100 == 0) setChanged();
   }
