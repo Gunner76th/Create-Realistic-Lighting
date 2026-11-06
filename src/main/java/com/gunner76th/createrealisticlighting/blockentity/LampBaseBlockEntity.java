@@ -98,8 +98,16 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
   // Voltage received from the server for client-side visual effects only.
   private double clientVisualVoltage = 0.0;
 
+  // Server-authoritative nominal voltage for client-side rendering.
+  // Defaults to 120 V until the first synchronization packet arrives.
+  private double clientNominalVoltage = 120.0;
+
   public double getClientVisualVoltage() {
     return clientVisualVoltage;
+  }
+
+  public double getClientNominalVoltage() {
+    return clientNominalVoltage;
   }
 
   // Tracks the last visual flicker voltage band sent to clients.
@@ -109,10 +117,11 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
   private long lastFlickerSyncTick = Long.MIN_VALUE;
 
   private int getFlickerBand() {
-    if (voltage < 100.0) return 0;
-    if (voltage < 106.0) return 1;
-    if (voltage < 111.0) return 2;
-    if (voltage < 115.0) return 3;
+    double operatingVoltage = normalizedVoltage();
+    if (operatingVoltage < 100.0) return 0;
+    if (operatingVoltage < 106.0) return 1;
+    if (operatingVoltage < 111.0) return 2;
+    if (operatingVoltage < 115.0) return 3;
     return 4;
   }
 
@@ -120,6 +129,18 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
   private static final double SHUTDOWN_VOLTAGE = 100.0;
   private static final double RECOVERY_VOLTAGE = 105.0;
   private static final double NOMINAL_VOLTAGE = 120.0;
+
+  /**
+   * Converts measured voltage to its equivalent on the original
+   * 120 V operating scale.
+   *
+   * This preserves Alpha 4 voltage behavior at any configured
+   * nominal voltage between 60 V and 480 V.
+   */
+  private double normalizedVoltage() {
+    return voltage * NOMINAL_VOLTAGE
+        / com.gunner76th.createrealisticlighting.config.EnergyConfig.nominalVoltage();
+  }
 
   private double nominalPower() {
     // Power Grid may call buildCircuit() from the superclass constructor,
@@ -140,7 +161,8 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
   private void updateLoad() {
     if (loadWire == null) return;
     double watts = nominalPower();
-    loadWire.setResistance(watts > 0 ? NOMINAL_VOLTAGE * NOMINAL_VOLTAGE / watts : 1_000_000);
+    double nominalVoltage = com.gunner76th.createrealisticlighting.config.EnergyConfig.nominalVoltage();
+    loadWire.setResistance(watts > 0 ? nominalVoltage * nominalVoltage / watts : 1_000_000);
     loadWire.setState(canDrawPower() && watts > 0);
   }
 
@@ -289,7 +311,8 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
   // Piecewise-linear overvoltage wear, using the approved Alpha 3 balance points.
   // Instant burnout is handled separately before wear is accumulated.
   private double overvoltageWearMultiplier() {
-    if (voltage <= 125.0) return 1.0;
+    double operatingVoltage = normalizedVoltage();
+    if (operatingVoltage <= 125.0) return 1.0;
     final double[] volts;
     final double[] multipliers;
     if (bulb.is(ModItems.INCANDESCENT_BULB.get())) {
@@ -305,8 +328,8 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
       return 1.0;
     }
     for (int i = 1; i < volts.length; i++) {
-      if (voltage < volts[i]) {
-        double fraction = (voltage - volts[i - 1]) / (volts[i] - volts[i - 1]);
+      if (operatingVoltage < volts[i]) {
+        double fraction = (operatingVoltage - volts[i - 1]) / (volts[i] - volts[i - 1]);
         return multipliers[i - 1] + fraction * (multipliers[i] - multipliers[i - 1]);
       }
     }
@@ -316,20 +339,22 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
   // Incandescent filaments age more slowly when operated below 115 V.
   // Preserve a small nonzero wear rate while illuminated.
   private double incandescentUndervoltageWearMultiplier() {
-    if (!bulb.is(ModItems.INCANDESCENT_BULB.get()) || voltage >= 115.0) return 1.0;
-    return Math.max(0.05, Math.pow(Math.max(0.0, voltage) / 115.0, 12.0));
+    double operatingVoltage = normalizedVoltage();
+    if (!bulb.is(ModItems.INCANDESCENT_BULB.get()) || operatingVoltage >= 115.0) return 1.0;
+    return Math.max(0.05, Math.pow(Math.max(0.0, operatingVoltage) / 115.0, 12.0));
   }
 
   // LED driver electronics accumulate extra wear under nominal voltage.
   // Linear interpolation follows the approved Alpha 3 undervoltage balance points.
   private double ledUndervoltageWearMultiplier() {
-    if (!bulb.is(ModItems.LED_BULB.get()) || voltage >= 120.0) return 1.0;
+    double operatingVoltage = normalizedVoltage();
+    if (!bulb.is(ModItems.LED_BULB.get()) || operatingVoltage >= 120.0) return 1.0;
     final double[] volts = {100.0, 105.0, 110.0, 115.0, 120.0};
     final double[] multipliers = {2.5, 2.0, 1.5, 1.2, 1.0};
-    if (voltage <= volts[0]) return multipliers[0];
+    if (operatingVoltage <= volts[0]) return multipliers[0];
     for (int i = 1; i < volts.length; i++) {
-      if (voltage <= volts[i]) {
-        double fraction = (voltage - volts[i - 1]) / (volts[i] - volts[i - 1]);
+      if (operatingVoltage <= volts[i]) {
+        double fraction = (operatingVoltage - volts[i - 1]) / (volts[i] - volts[i - 1]);
         return multipliers[i - 1] + fraction * (multipliers[i] - multipliers[i - 1]);
       }
     }
@@ -343,17 +368,19 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
   }
 
   private boolean isVoltageEligible() {
-    return bulb.is(ModItems.INCANDESCENT_BULB.get()) ? voltage >= MINIMUM_VOLTAGE : voltageEligible;
+    return bulb.is(ModItems.INCANDESCENT_BULB.get()) ? normalizedVoltage() + MINIMUM_VOLTAGE * 0.0001 >= MINIMUM_VOLTAGE : voltageEligible;
   }
 
   private boolean hasSufficientVoltage() {
     if (bulb.is(ModItems.INCANDESCENT_BULB.get())) {
-      return voltage >= MINIMUM_VOLTAGE;
+      return normalizedVoltage() + MINIMUM_VOLTAGE * 0.0001 >= MINIMUM_VOLTAGE;
     }
 
-    if (voltage < SHUTDOWN_VOLTAGE) {
+    double operatingVoltage = normalizedVoltage();
+
+    if (operatingVoltage < SHUTDOWN_VOLTAGE) {
       voltageEligible = false;
-    } else if (voltage >= RECOVERY_VOLTAGE) {
+    } else if (operatingVoltage >= RECOVERY_VOLTAGE) {
       voltageEligible = true;
     }
 
@@ -364,7 +391,7 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
     if (!lit) return 0;
     if (!bulb.is(ModItems.INCANDESCENT_BULB.get())) return 15;
     double normalized =
-        Mth.clamp((voltage - MINIMUM_VOLTAGE) / (NOMINAL_VOLTAGE - MINIMUM_VOLTAGE), 0.0, 1.0);
+        Mth.clamp((normalizedVoltage() - MINIMUM_VOLTAGE) / (NOMINAL_VOLTAGE - MINIMUM_VOLTAGE), 0.0, 1.0);
     return Mth.clamp((int) Math.round(1.0 + 14.0 * Math.pow(normalized, 1.5)), 1, 15);
   }
 
@@ -384,12 +411,13 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
     }
 
     boolean sufficientVoltage = hasSufficientVoltage();
-    if (canDrawPower() && voltage >= instantBurnoutVoltage()) {
+    if (canDrawPower() && normalizedVoltage() >= instantBurnoutVoltage()) {
       accumulatedWear = lifespan();
       updateLoad();
     }
 
     boolean lit = canDrawPower() && sufficientVoltage;
+
     long gameTick = level.getGameTime();
 
     if (lastWearGameTick != gameTick) {
@@ -471,6 +499,9 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
     // This does not change world lighting or electrical simulation.
     if (clientPacket) {
       tag.putDouble("ClientVisualVoltage", voltage);
+      tag.putDouble(
+          "ClientNominalVoltage",
+          com.gunner76th.createrealisticlighting.config.EnergyConfig.nominalVoltage());
     }
 
     if (!bulb.isEmpty()) {
@@ -492,6 +523,16 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
     // Receive voltage for client-side rendering only.
     if (clientPacket && tag.contains("ClientVisualVoltage", Tag.TAG_DOUBLE)) {
       clientVisualVoltage = tag.getDouble("ClientVisualVoltage");
+    }
+
+    if (clientPacket && tag.contains("ClientNominalVoltage", Tag.TAG_DOUBLE)) {
+      double receivedNominalVoltage = tag.getDouble("ClientNominalVoltage");
+
+      if (Double.isFinite(receivedNominalVoltage)
+          && receivedNominalVoltage >= 60.0
+          && receivedNominalVoltage <= 480.0) {
+        clientNominalVoltage = receivedNominalVoltage;
+      }
     }
     bulb =
         tag.contains("Bulb", Tag.TAG_COMPOUND)

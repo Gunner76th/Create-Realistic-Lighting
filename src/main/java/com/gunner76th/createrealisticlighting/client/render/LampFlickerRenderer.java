@@ -82,7 +82,9 @@ public final class LampFlickerRenderer implements BlockEntityRenderer<LampBaseBl
   // Only swaps the rendered bulb model. Never changes electrical state or world light.
   private static boolean showLitBulb(LampBaseBlockEntity lamp, float partialTick) {
     if (!ClientConfig.ENABLE_BULB_FLICKERING.get()) return true;
-    double voltage = lamp.getClientVisualVoltage();
+    // Normalize the server-supplied voltage to the original 120 V scale.
+    double voltage =
+        lamp.getClientVisualVoltage() * 120.0 / lamp.getClientNominalVoltage();
     if (voltage >= 115.0) return true;
 
     double probability;
