@@ -1,10 +1,10 @@
 # Create: Realistic Lighting
 
-**Stable release: 1.0.0** · **Minecraft Java Edition 1.21.1** · **NeoForge**
+**Stable release: 1.0.1** · **Minecraft Java Edition 1.21.1** · **NeoForge**
 
 Create: Realistic Lighting adds replaceable light bulbs, practical industrial fixtures, and voltage-sensitive lighting to the Create ecosystem. Fixtures operate on **Create: Power Grid's native electrical network**—not Forge Energy (FE/RF).
 
-> **Release status:** Version 1.0.0 has completed local build and gameplay validation and is being prepared for public publication. A GitHub release and CurseForge listing may not be available yet.
+> **Latest release:** [v1.0.1 on GitHub](https://github.com/Gunner76th/Create-Realistic-Lighting/releases/tag/v1.0.1). Downloads are also available through the [CurseForge project page](https://www.curseforge.com/minecraft/mc-mods/create-realistic-lighting).
 
 ## Features
 
@@ -18,12 +18,14 @@ Create: Realistic Lighting adds replaceable light bulbs, practical industrial fi
 
 ### Replaceable bulbs
 
-| Bulb | Nominal power at 120 V | Base active-use lifespan | Lighting behavior |
+| Bulb | Default nominal power at 120 V | Base active-use lifespan | Lighting behavior |
 | --- | ---: | --- | --- |
 | Incandescent | 60 W | 30 Minecraft days | Familiar localized light; dims as voltage drops |
 | Fluorescent | 30 W | 90 Minecraft days | Efficient light; low-voltage flicker behavior |
 | LED | 15 W | 300 Minecraft days | Extended, omnidirectional illumination; low-voltage flicker behavior |
 | Grow | 45 W | 90 Minecraft days | Lighting plus nearby crop-growth acceleration; fluorescent-style low-voltage behavior |
+
+The wattages shown above are **defaults**, not fixed values. Since v1.0.1, each bulb type's nominal electrical consumption can be configured independently (1–1,000 W). This changes its electrical load, not its lighting behavior or base lifespan.
 
 Lifespans are baseline values, not guarantees: electrical conditions can accelerate or reduce wear. Wear is retained when a bulb is removed and reinstalled.
 
@@ -31,7 +33,7 @@ Lifespans are baseline values, not guarantees: electrical conditions can acceler
 
 - **Create: Power Grid is required.** Fixtures connect to its electrical wiring and consume electricity through its native system.
 - Default nominal operating voltage is **120 V**.
-- Different bulbs have different nominal electrical loads.
+- Different bulbs have independently configurable nominal electrical loads (1–1,000 W per bulb type).
 - No FE/RF energy buffers or FE/RF power compatibility.
 - Lamp operation responds to available power, the selected control mode, and bulb condition.
 
@@ -78,13 +80,13 @@ Bulb inventory tooltips display remaining lifespan information.
 | Create: Power Grid | 0.6.2 or newer compatible 1.21.1 build |
 | Java | 21 |
 
-**Create and Create: Power Grid are required dependencies.** Architectury API is not listed as a direct dependency of Create: Realistic Lighting in its 1.0.0 mod metadata; install any additional dependencies required by your selected Create or Power Grid builds.
+**Create and Create: Power Grid are required dependencies.** Architectury API is not listed as a direct dependency of Create: Realistic Lighting in its v1.0.0 mod metadata; install any additional dependencies required by your selected Create or Power Grid builds.
 
 ## Installation
 
 1. Set up a **Minecraft Java Edition 1.21.1** instance with a compatible **NeoForge 21.1.x** installation.
 2. Install compatible versions of **Create** and **Create: Power Grid**, along with any dependencies those mods require.
-3. Place `create_realistic_lighting-1.0.0.jar` in the instance's `mods` folder.
+3. Place `create_realistic_lighting-1.0.1.jar` in the instance's `mods` folder.
 4. Start Minecraft and confirm the mod loads successfully.
 
 For multiplayer, install the required mods on the server and connecting clients. Back up existing worlds before adding or upgrading mods.
@@ -93,10 +95,27 @@ For multiplayer, install the required mods on the server and connecting clients.
 
 The mod uses TOML configuration files for gameplay and client-side options. Configuration edits are intended to take effect **after restarting Minecraft**; live reloading is not supported.
 
-- Electrical and bulb-related settings are configured through the mod's common configuration.
+- Nominal voltage and bulb electrical consumption are configured through the mod's electrical TOML settings.
+- In v1.0.1, each bulb's nominal wattage can be set independently between **1.0 and 1000.0 W**. Default values remain unchanged from v1.0.0.
 - Client-side flicker effects can be disabled through the client configuration.
 - Flicker is a **visual effect**; it does not repeatedly change world light levels to simulate flashing.
-- The earlier first-launch photosensitivity warning screen was removed and is **not** part of the 1.0.0 release.
+- The earlier first-launch photosensitivity warning screen was removed and is **not** part of the current release.
+
+### Configurable bulb wattage (v1.0.1)
+
+Edit the mod's TOML configuration file while Minecraft or the dedicated server is stopped:
+
+```toml
+[electrical.bulbWattage]
+    incandescentWatts = 60.0
+    fluorescentWatts = 30.0
+    ledWatts = 15.0
+    growWatts = 45.0
+```
+
+Each value accepts **1.0–1000.0 watts**. The default nominal voltage remains **120 V** (`nominalVoltage` in the `[electrical]` section). Restart Minecraft or the dedicated server to apply changes; edits are not reloaded live.
+
+The configured wattage determines the electrical load presented to **Create: Power Grid**. Actual measured consumption depends on supplied voltage. Changing wattage does **not** directly change bulb brightness, illumination radius, flicker thresholds, or base lifespan.
 
 > **Accessibility note:** Lighting effects may include visible flicker when bulbs are operated outside their normal voltage range. Players sensitive to flashing effects should review the client flicker setting before play.
 
@@ -114,7 +133,9 @@ The release was validated using compiled JARs in an actual Minecraft client. The
 
 ## Release validation
 
-Version 1.0.0 has undergone local testing of fixture operation, all four bulb types, Power Grid connections, On/Off/Redstone modes, voltage-dependent behavior, burnout and wear persistence, world reloads, and multi-fixture lighting performance. This testing does not guarantee compatibility with every modpack or server environment.
+Version 1.0.1 was built and tested in Minecraft with all four bulbs at their original default wattages and at custom values (100 W incandescent, 40 W fluorescent, 25 W LED, and 60 W Grow). Create: Power Grid electrical readings matched the configured loads at approximately 120 V. Normal lamp operation was observed.
+
+Version 1.0.0 underwent local testing of fixture operation, all four bulb types, Power Grid connections, On/Off/Redstone modes, voltage-dependent behavior, burnout and wear persistence, world reloads, and multi-fixture lighting performance. This testing does not guarantee compatibility with every modpack or server environment.
 
 Please report reproducible issues through the [GitHub issue tracker](https://github.com/Gunner76th/Create-Realistic-Lighting/issues), including the Minecraft/NeoForge versions, mod versions, and relevant logs.
 
