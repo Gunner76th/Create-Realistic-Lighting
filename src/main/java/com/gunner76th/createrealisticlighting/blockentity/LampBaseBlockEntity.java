@@ -146,10 +146,10 @@ public class LampBaseBlockEntity extends ElectricBlockEntity implements MenuProv
     // Power Grid may call buildCircuit() from the superclass constructor,
     // before this class's instance fields (including bulb) are initialized.
     if (bulb == null || bulb.isEmpty()) return 0;
-    if (bulb.is(ModItems.INCANDESCENT_BULB.get())) return 60;
-    if (bulb.is(ModItems.FLUORESCENT_BULB.get())) return 30;
-    if (bulb.is(ModItems.LED_BULB.get())) return 15;
-    if (bulb.is(ModItems.GROW_BULB.get())) return 45;
+    if (bulb.is(ModItems.INCANDESCENT_BULB.get())) return com.gunner76th.createrealisticlighting.config.EnergyConfig.incandescentWatts();
+    if (bulb.is(ModItems.FLUORESCENT_BULB.get())) return com.gunner76th.createrealisticlighting.config.EnergyConfig.fluorescentWatts();
+    if (bulb.is(ModItems.LED_BULB.get())) return com.gunner76th.createrealisticlighting.config.EnergyConfig.ledWatts();
+    if (bulb.is(ModItems.GROW_BULB.get())) return com.gunner76th.createrealisticlighting.config.EnergyConfig.growWatts();
     return 0;
   }
 
